@@ -12,6 +12,7 @@ const PUBLIC_ROUTES = [
   "/reset-password",
   "/verify-email",
   "/verify-otp-password",
+  "/model-test",
 ];
 
 const PUBLIC_FILE =

@@ -41,7 +41,7 @@ export default function AuthPage(): JSX.Element {
     <section className="mx-auto max-w-xl px-2 py-8">
       {/* ── Title ── */}
       <h1 className="mb-6 text-center text-2xl font-extrabold tracking-tight text-white">
-        Welcome to Upbit Trade
+        Welcome to Qx Profit
       </h1>
 
       {/* ── Tab Controls ── */}

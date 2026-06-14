@@ -68,8 +68,8 @@ const Rule: React.FC<{ ok?: boolean; children: React.ReactNode }> = ({
     ok === undefined
       ? "text-neutral-400"
       : ok
-      ? "text-emerald-500"
-      : "text-red-500";
+        ? "text-emerald-500"
+        : "text-red-500";
   return (
     <div className={`flex items-center gap-2 text-sm ${cls}`}>
       {ok === undefined ? (
@@ -99,7 +99,7 @@ const RegisterForm: React.FC<{
   // ── compute referral code from URL (memoized)
   const codeFromUrl = useMemo(
     () => getReferralFromParams(searchParams),
-    [searchParams]
+    [searchParams],
   );
 
   // ── final referral to use (URL > prop > empty)
@@ -154,7 +154,7 @@ const RegisterForm: React.FC<{
       num: /\d/.test(pwd),
       special: /[^A-Za-z0-9]/.test(pwd),
     }),
-    [pwd]
+    [pwd],
   );
 
   /* ── submit ──────────────────────────────────────────────── */

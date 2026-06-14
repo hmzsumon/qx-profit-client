@@ -35,6 +35,8 @@
 		"@radix-ui/react-slot": "^1.2.0",
 		"@radix-ui/react-tooltip": "^1.2.4",
 		"@ramonak/react-progress-bar": "^5.3.0",
+		"@react-three/drei": "9",
+		"@react-three/fiber": "8",
 		"@reduxjs/toolkit": "^2.9.0",
 		"@vladmandic/face-api": "^1.7.15",
 		"animejs": "^4.1.3",
