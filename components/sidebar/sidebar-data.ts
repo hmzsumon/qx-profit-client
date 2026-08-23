@@ -12,6 +12,7 @@ import {
   Settings,
   ShieldHalf,
   SquareGanttChart,
+  TrendingUp,
   Upload,
   Wallet,
 } from "lucide-react";
@@ -64,6 +65,13 @@ export const NAV_ITEMS: NavItem[] = [
   // },
   { key: "deposit", label: "Deposit", icon: Download, href: "/deposit" },
   { key: "withdraw", label: "Withdraw", icon: Upload, href: "/withdraw" },
+  {
+    key: "trade-investment",
+    label: "Trade Investment",
+    icon: TrendingUp,
+    href: "/trade-investment",
+    badge: "new",
+  },
   {
     key: "rank-reward",
     label: "Rank Reward",

@@ -19,19 +19,19 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Upbit - Trade",
-  description: "Trade on your favorite trading platforms with Upbit Trade",
+  title: "QX Profit",
+  description: "Trade on your favorite trading platforms with QX Profit",
   openGraph: {
-    title: "Upbit - Trade",
-    description: "Trade on your favorite trading platforms with Upbit Trade",
-    url: "https://www.upbittrade.com/",
-    siteName: "Upbit",
+    title: "QX Profit",
+    description: "Trade on your favorite trading platforms with QX Profit",
+    url: "https://www.qxprofit.com/",
+    siteName: "QX Profit",
     images: [
       {
-        url: "https://www.upbittrade.com/og-image.png",
+        url: "https://www.qxprofit.com/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Upbit Trade",
+        alt: "QX Profit",
       },
     ],
     type: "website",
