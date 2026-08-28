@@ -15,6 +15,9 @@ const PUBLIC_ROUTES = [
   "/model-test",
 ];
 
+// ✅ Marketing / info pages — always reachable (logged in OR out), never redirected
+const INFO_ROUTES = ["/faq", "/about", "/blog", "/demo"];
+
 const PUBLIC_FILE =
   /\.(?:png|jpe?g|gif|webp|svg|ico|bmp|avif|mp3|wav|ogg|mp4|webm|txt|xml|json|js|css|map|woff2?|ttf|eot)$/i;
 
@@ -40,6 +43,11 @@ export function middleware(request: NextRequest) {
     pathname.endsWith(".webmanifest") ||
     PUBLIC_FILE.test(pathname)
   ) {
+    return NextResponse.next();
+  }
+
+  // ✅ Info/marketing pages — allow through without any auth gate or dashboard bounce
+  if (INFO_ROUTES.includes(pathname)) {
     return NextResponse.next();
   }
 

@@ -1,35 +1,33 @@
 "use client";
 
-/* ────────── Section: Imports ────────── */
-import RegisterForm from "@/components/register-login/RegisterForm";
-import SignInForm from "@/components/register-login/SignInForm";
-import { TabButton } from "@/components/register-login/Tabs";
+/* ────────── QX PROFIT — Auth page (Login / Registration) ──────────
+   One route, two tabs. The tab is mirrored to the URL (?tab=signin |
+   ?tab=create) so the navbar "Log in" / "Sign up" links land on the
+   right form.
+   ──────────────────────────────────────────────────────────────── */
+
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 
+import QxRegisterForm from "@/components/register-login/QxRegisterForm";
+import QxSignInForm from "@/components/register-login/QxSignInForm";
+import { QxAuthTabs } from "@/components/register-login/QxUI";
+
 type Tab = "signin" | "create";
 
-/* ────────── Component: AuthPage ────────── */
 export default function AuthPage(): JSX.Element {
-  /* ── URL state ── */
+  /* ────────── URL <-> tab state ────────── */
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  /* ── Derive tab from URL ── */
-  const tabFromUrl = useMemo<Tab>(() => {
-    const t = searchParams.get("tab");
-    return t === "create" ? "create" : "signin";
-  }, [searchParams]);
+  const tabFromUrl = useMemo<Tab>(
+    () => (searchParams.get("tab") === "create" ? "create" : "signin"),
+    [searchParams],
+  );
 
-  /* ── Local state ── */
   const [tab, setTab] = useState<Tab>(tabFromUrl);
+  useEffect(() => setTab(tabFromUrl), [tabFromUrl]);
 
-  /* ── Keep state in sync with URL ── */
-  useEffect(() => {
-    setTab(tabFromUrl);
-  }, [tabFromUrl]);
-
-  /* ── Helper: update tab + URL without pushing history ── */
   const setTabAndUrl = (next: Tab) => {
     const sp = new URLSearchParams(Array.from(searchParams.entries()));
     sp.set("tab", next);
@@ -37,36 +35,29 @@ export default function AuthPage(): JSX.Element {
     setTab(next);
   };
 
+  /* ────────── Render ────────── */
   return (
-    <section className="mx-auto max-w-xl px-2 py-8">
-      {/* ── Title ── */}
-      <h1 className="mb-6 text-center text-2xl font-extrabold tracking-tight text-white">
-        Welcome to Qx Profit
+    <section className="mx-auto max-w-xl px-4 py-14 sm:py-20">
+      {/* ── Heading ── */}
+      <h1 className="mb-8 text-center text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+        {tab === "signin" ? "Sign In To Your Account" : "Sign Up"}
       </h1>
 
-      {/* ── Tab Controls ── */}
-      <div className="mb-6 flex justify-center gap-8">
-        <TabButton
-          active={tab === "signin"}
-          onClick={() => setTabAndUrl("signin")}
-        >
-          Sign in
-        </TabButton>
-        <TabButton
-          active={tab === "create"}
-          onClick={() => setTabAndUrl("create")}
-        >
-          Create an account
-        </TabButton>
-      </div>
-
       {/* ── Card ── */}
-      <div className="rounded-2xl border border-neutral-800 bg-neutral-900/60 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.03)_inset,0_10px_50px_-20px_rgba(0,0,0,0.6)]">
-        {tab === "signin" ? (
-          <SignInForm onSuccess={() => setTabAndUrl("signin")} />
-        ) : (
-          <RegisterForm onSuccess={() => setTabAndUrl("signin")} />
-        )}
+      <div className="rounded-2xl bg-[#252c3d] shadow-2xl shadow-black/30">
+        {/* Tabs */}
+        <div className="flex justify-center border-b border-white/[0.06] px-6 py-6">
+          <QxAuthTabs value={tab} onChange={setTabAndUrl} />
+        </div>
+
+        {/* Form */}
+        <div className="px-6 py-8 sm:px-10">
+          {tab === "signin" ? (
+            <QxSignInForm />
+          ) : (
+            <QxRegisterForm onSuccess={() => setTabAndUrl("signin")} />
+          )}
+        </div>
       </div>
     </section>
   );

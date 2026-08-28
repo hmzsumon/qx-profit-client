@@ -1,57 +1,63 @@
-/* ────────── QX PROFIT — Testimonials Section ────────── */
+/* ────────── QX PROFIT — Testimonials ──────────
+   "What people say about us" — 3 × 2 review cards with a
+   five-star rating, then a "View all reviews" CTA.
+   ───────────────────────────────────────────── */
 
-import React from "react";
 import Link from "next/link";
+import React from "react";
 
-const testimonials = [
+/* ────────── Data: customer reviews ────────── */
+type Review = {
+  name: string;
+  date: string;
+  earned: string;
+  text: string;
+};
+
+const REVIEWS: Review[] = [
   {
-    name: "Rahim",
-    flag: "🇧🇩",
-    country: "Dhaka, Bangladesh",
-    stars: 5,
-    text: "Excellent platform! I appreciate how reliable everything is. Execution is fast and payouts arrive without any delay. Highly recommend it.",
+    name: "Rahima",
+    date: "29.01.2025",
+    earned: "$8440",
+    text: "As a beginner, I really appreciated the demo account. It let me experiment with different indicators and strategies without the fear of losing money. Now I trade with confidence.",
   },
   {
-    name: "Terrence",
-    flag: "🇺🇸",
-    country: "London, USA",
-    stars: 5,
-    text: "After trying many platforms, this is by far the best for ease of use. I can navigate it effortlessly and the signals are very accurate.",
+    name: "Terwase",
+    date: "05.12.2024",
+    earned: "$913",
+    text: "The interface is easy and simple to understand and use. The proximity ratio for placing an up or down trade, buy or sell, is 1:1. The app works smoothly on my phone.",
   },
   {
     name: "Abhi",
-    flag: "🇮🇳",
-    country: "Kerala, India",
-    stars: 5,
-    text: "This platform is really handy. It's very easy to use and there are many features. I highly recommend it to anyone who wants to invest.",
+    date: "28.11.2024",
+    earned: "$1041",
+    text: "Genuinely a great trading platform. I tried a lot of trading apps, but now that I have found QX Profit, I am sticking to it. Withdrawals are fast and support actually replies.",
   },
   {
     name: "Sonal",
-    flag: "🇮🇳",
-    country: "Mumbai, India",
-    stars: 4,
-    text: "I've been a trader using this platform for 2 years and I'm really satisfied. Customer service is always available when needed.",
+    date: "25.11.2024",
+    earned: "$398",
+    text: "I've had nothing but positive experiences with QX Profit over the years that I've been using it. The platform is intuitive and the user-friendly design keeps me coming back.",
   },
   {
     name: "Md Imran",
-    flag: "🇧🇩",
-    country: "Sylhet, Bangladesh",
-    stars: 5,
-    text: "Incredible results! The tournaments and bonus programs make it even more exciting. Deposits and withdrawals work seamlessly.",
+    date: "24.11.2024",
+    earned: "$217",
+    text: "In binary trading, QX Profit is very good for me! The broker's deposit and withdrawal system is very good. Best regards, QX Profit broker from me.",
   },
   {
     name: "Shree Ganesh",
-    flag: "🇮🇳",
-    country: "Tamil Nadu, India",
-    stars: 5,
-    text: "Outstanding experience! The interface is clean and I love the indicator tools. My win rate has improved significantly since joining.",
+    date: "20.11.2024",
+    earned: "$379",
+    text: "I've been using QX Profit for some time now, and the experience has been excellent. The platform is straightforward to navigate, with a clean and modern layout.",
   },
 ];
 
-const Stars: React.FC<{ count: number }> = ({ count }) => (
-  <div className="flex gap-0.5 mt-1">
+/* ────────── Sub-component: 5 stars ────────── */
+const Stars: React.FC = () => (
+  <div className="mt-2 flex gap-0.5 text-[#12b76a]" aria-label="5 out of 5">
     {Array.from({ length: 5 }).map((_, i) => (
-      <span key={i} className={i < count ? "text-[#f59e0b]" : "text-gray-600"} style={{ fontSize: 13 }}>
+      <span key={i} style={{ fontSize: 14 }}>
         ★
       </span>
     ))}
@@ -59,49 +65,48 @@ const Stars: React.FC<{ count: number }> = ({ count }) => (
 );
 
 const QxTestimonials: React.FC = () => (
-  <section className="bg-[#0f1923] py-16 sm:py-20">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
+  <section className="bg-[#161b27] py-16 sm:py-20">
+    <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       {/* ── Section header ── */}
-      <div className="text-center mb-10">
-        <h2 className="text-2xl sm:text-3xl font-bold text-white">
+      <div className="mb-12 text-center">
+        <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-[32px]">
           What people say about us
         </h2>
-        <p className="mt-2 text-gray-400 text-sm">
-          We added our customer reviews on a five-point scale.
+        <p className="mt-3 text-sm text-gray-400">
+          We asked our customers to rate QX Profit on a five-point scale.
         </p>
       </div>
 
       {/* ── Reviews grid ── */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {testimonials.map((t, idx) => (
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {REVIEWS.map((r) => (
           <div
-            key={idx}
-            className="bg-[#161f2c] border border-white/5 rounded-xl p-5 hover:border-white/10 transition-all"
+            key={r.name}
+            className="flex flex-col rounded-2xl border border-white/[0.05] bg-[#1c2230] p-6"
           >
-            {/* Author */}
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-9 h-9 rounded-full bg-[#1e2d3d] flex items-center justify-center text-base">
-                {t.flag}
-              </div>
-              <div>
-                <p className="text-white text-sm font-semibold">{t.name}</p>
-                <p className="text-gray-500 text-xs">{t.country}</p>
-              </div>
-            </div>
-            <Stars count={t.stars} />
-            <p className="mt-3 text-gray-400 text-xs leading-relaxed line-clamp-4">
-              {t.text}
+            <p className="text-[15px] font-bold text-white">{r.name}</p>
+            <p className="mt-1 text-xs text-gray-500">
+              {r.date} · Earned: {r.earned}
             </p>
+            <Stars />
+            <p className="mt-3 line-clamp-4 flex-1 text-[13px] leading-relaxed text-gray-400">
+              {r.text}
+            </p>
+            <Link
+              href="/about"
+              className="mt-4 inline-flex items-center gap-1 text-[13px] font-semibold text-[#4c9ffb] hover:text-[#7bb8fc]"
+            >
+              Read more <span aria-hidden>→</span>
+            </Link>
           </div>
         ))}
       </div>
 
-      {/* ── View all button ── */}
-      <div className="mt-8 text-center">
+      {/* ── View all CTA ── */}
+      <div className="mt-10 text-center">
         <Link
-          href="/reviews"
-          className="inline-block bg-[#00c97a] hover:bg-[#00b36b] text-black font-bold text-sm px-6 py-3 rounded-lg transition-colors"
+          href="/about"
+          className="inline-flex items-center justify-center rounded-lg bg-[#12b76a] px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-[#0fa762]"
         >
           View all reviews
         </Link>

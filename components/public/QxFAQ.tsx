@@ -1,98 +1,74 @@
-/* ────────── QX PROFIT — FAQ Section ────────── */
+/* ────────── QX PROFIT — FAQ teaser (home) ──────────
+   Six of the most common questions in an accordion, plus a
+   "still have questions?" prompt linking to the full /faq page.
+   ────────────────────────────────────────────────── */
 
-"use client";
+import Link from "next/link";
+import React from "react";
+import { Armchair } from "lucide-react";
+import QxAccordion, { type QxAccordionItem } from "./QxAccordion";
 
-import React, { useState } from "react";
-import { Plus, Minus } from "lucide-react";
-
-const faqs = [
+/* ────────── Data: teaser questions ────────── */
+const FAQS: QxAccordionItem[] = [
   {
-    q: "How do I know how to trade?",
-    a: "Trading on our platform is simple. You predict whether an asset's price will go higher or lower within a selected time frame. We also offer free demo accounts with $10,000 virtual funds so you can practice without risk.",
+    q: "How do I learn how to trade?",
+    a: "Open a free demo account with 10,000 USD in virtual funds. Practise placing up/down trades with zero risk, then switch to a real account whenever you feel ready.",
   },
   {
     q: "How long does it take to withdraw funds?",
-    a: "Withdrawals are processed quickly — usually within 1–3 business days depending on your payment method. Many e-wallet withdrawals are processed within minutes.",
+    a: "Most withdrawal requests are processed within a few minutes and up to 3 business days, depending on the payment method you choose.",
   },
   {
-    q: "What is trading platform and what is it for?",
-    a: "A trading platform is software that allows you to buy and sell financial instruments like currencies, commodities, indices, and crypto. Our platform offers an intuitive interface with built-in signals and indicators.",
+    q: "What is a trading platform and what is it for?",
+    a: "A trading platform is the software you use to analyse price charts and place trades on assets such as currencies, commodities, indices and crypto. QX Profit runs in your browser and on mobile.",
   },
   {
     q: "Can I trade using a phone / mobile device?",
-    a: "Absolutely! Our platform is fully optimized for mobile. Download the app from Google Play or use the mobile-responsive web version from any browser on your phone or tablet.",
+    a: "Yes. QX Profit is fully responsive and there is a dedicated mobile app, so you can trade from any phone or tablet with an internet connection.",
   },
   {
     q: "What is the minimum deposit amount?",
-    a: "The minimum deposit amount is just $10 USD, making it accessible for traders at every level. You can start with a demo account for free before committing any real funds.",
+    a: "You can open a real account starting from just 10 USD.",
   },
   {
     q: "Are there any deposit or withdrawal fees?",
-    a: "We do not charge deposit fees. Withdrawal fees may vary based on the payment method selected. Please review the payment page for the latest fee schedule.",
+    a: "QX Profit does not charge a deposit fee. Withdrawal fees, if any, depend on the selected payment provider and are shown before you confirm.",
   },
 ];
 
-const QxFAQ: React.FC = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-  return (
-    <section className="bg-[#0f1923] py-16 sm:py-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        {/* ── Section header ── */}
-        <div className="text-center mb-10">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white">
-            Frequently asked questions
-          </h2>
-          <p className="mt-2 text-gray-400 text-sm">
-            Here the most common questions of new traders answered here.
-          </p>
-        </div>
-
-        {/* ── Accordion items ── */}
-        <div className="space-y-2">
-          {faqs.map((faq, idx) => {
-            const isOpen = openIndex === idx;
-            return (
-              <div
-                key={idx}
-                className={`border rounded-xl overflow-hidden transition-all ${
-                  isOpen
-                    ? "border-[#00c97a]/30 bg-[#161f2c]"
-                    : "border-white/5 bg-[#161f2c] hover:border-white/10"
-                }`}
-              >
-                {/* ── Question row ── */}
-                <button
-                  className="w-full flex items-center justify-between px-5 py-4 text-left gap-4"
-                  onClick={() => setOpenIndex(isOpen ? null : idx)}
-                >
-                  <span className="text-sm font-medium text-white">{faq.q}</span>
-                  <span className="shrink-0 text-[#00c97a]">
-                    {isOpen ? <Minus size={16} /> : <Plus size={16} />}
-                  </span>
-                </button>
-
-                {/* ── Answer panel ── */}
-                {isOpen && (
-                  <div className="px-5 pb-4">
-                    <p className="text-gray-400 text-sm leading-relaxed border-t border-white/5 pt-3">
-                      {faq.a}
-                    </p>
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-
-        {/* ── Corner mascot decoration ── */}
-        <div className="mt-8 flex justify-end">
-          <div className="text-5xl opacity-20 select-none">🤑</div>
-        </div>
+const QxFAQ: React.FC = () => (
+  <section className="bg-[#161b27] py-16 sm:py-20">
+    <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      {/* ── Section header ── */}
+      <div className="mb-12 text-center">
+        <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-[32px]">
+          Frequently asked questions
+        </h2>
+        <p className="mt-3 text-sm text-gray-400">
+          See the most common questions of new traders answered here.
+        </p>
       </div>
-    </section>
-  );
-};
+
+      {/* ── Accordion ── */}
+      <QxAccordion items={FAQS} />
+
+      {/* ── Still-have-questions prompt ── */}
+      <div className="mt-10 flex items-center justify-between gap-4 rounded-2xl bg-[#1c2230] px-5 py-4">
+        <p className="text-[13px] text-gray-300">
+          Do you have some questions? Go to all questions in the{" "}
+          <Link href="/faq" className="font-semibold text-[#4c9ffb]">
+            FAQ section
+          </Link>{" "}
+          or{" "}
+          <Link href="/faq" className="font-semibold text-[#4c9ffb]">
+            contact us
+          </Link>
+          .
+        </p>
+        <Armchair size={40} className="hidden shrink-0 text-[#12b76a] sm:block" />
+      </div>
+    </div>
+  </section>
+);
 
 export default QxFAQ;

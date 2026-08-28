@@ -1,10 +1,11 @@
-import Logo from "@/components/branding/Logo";
-import GlowBackdrop from "@/components/decor/GlowBackdrop";
-import BackgroundFX from "@/components/register-login/BackgroundFX";
-import Link from "next/link";
-import React from "react";
+/* ────────── QX PROFIT — Auth layout (Login / Registration) ──────────
+   Same navbar + footer as the marketing site, with a faint line-chart
+   wash behind the auth card.
+   ─────────────────────────────────────────────────────────────────── */
 
-import LogoImg from "@/public/logo/logo_01.png";
+import React from "react";
+import QxNavbar from "@/components/public/QxNavbar";
+import QxFooter from "@/components/public/QxFooter";
 
 const RegisterLoginLayout = ({
   children,
@@ -12,25 +13,32 @@ const RegisterLoginLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div>
-      <section className="relative bg-neutral-950">
-        <GlowBackdrop variant="max" />
-        <main className="relative min-h-[100dvh] overflow-hidden text-neutral-100">
-          <BackgroundFX />
+    <div className="min-h-screen bg-[#161b27] text-white">
+      {/* ── Navbar (fixed, h-16) ── */}
+      <QxNavbar />
 
-          <header className="border-b border-neutral-900/60 bg-neutral-950/80 backdrop-blur">
-            <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-              <Link href="/" className="flex items-center gap-3">
-                <Logo src={LogoImg} size="xl" width={120} />
-              </Link>
-              <div className="text-sm text-neutral-400">
-                <Link href="#">Support</Link>
-              </div>
-            </div>
-          </header>
-          <div className="">{children}</div>
-        </main>
-      </section>
+      {/* ── Content ── */}
+      <main className="relative overflow-hidden pt-16">
+        {/* ── Background: faint chart silhouette ── */}
+        <svg
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-1/2 h-64 w-full -translate-y-1/2 opacity-[0.06]"
+          viewBox="0 0 1440 240"
+          preserveAspectRatio="none"
+        >
+          <polyline
+            points="0,180 120,150 240,170 360,110 480,140 600,80 720,120 840,60 960,100 1080,50 1200,90 1320,40 1440,70"
+            fill="none"
+            stroke="#4c9ffb"
+            strokeWidth="3"
+          />
+        </svg>
+
+        <div className="relative">{children}</div>
+      </main>
+
+      {/* ── Footer ── */}
+      <QxFooter />
     </div>
   );
 };
