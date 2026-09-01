@@ -4,23 +4,21 @@ import CopyToClipboard from "@/lib/CopyToClipboard";
 import { getErrorMessage } from "@/lib/getErrorMessage";
 import { useLogoutUserMutation } from "@/redux/features/auth/authApi";
 import { LogOut, Settings } from "lucide-react";
-import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 
 export default function UserMenu({ open }: { open: boolean }) {
   const { user } = useSelector((state: any) => state.auth);
-  const router = useRouter();
   const [logoutUser, { isLoading }] = useLogoutUserMutation();
 
   const handleLogout = async () => {
     try {
       await logoutUser(undefined).unwrap();
       toast.success("Logout successfully");
-
-      router.push("/");
     } catch (err) {
       toast.error(getErrorMessage(err));
+    } finally {
+      window.location.assign("/");
     }
   };
 

@@ -48,8 +48,8 @@ export default function SupportPage() {
         <div className={`${card} px-2 py-4`}>
           <h1 className="text-2xl font-extrabold tracking-tight">Need help?</h1>
           <p className="mt-1 text-neutral-300">
-            We’re here to help with accounts, deposits & withdrawals, Smart
-            trade, and security.
+            We’re here to help with deposits & withdrawals, QX Investment, and
+            security.
           </p>
 
           <div className="mt-4 flex w-full flex-wrap items-center gap-3">
@@ -191,36 +191,12 @@ export default function SupportPage() {
         <h2 className="mb-4 text-lg font-semibold">Quick answers</h2>
         <div className="grid gap-3 md:grid-cols-2">
           <div className="rounded-lg border border-neutral-800 p-3">
-            <div className="text-sm font-semibold">
-              Minimum deposit (Smart Trade)
-            </div>
-            <p className="text-sm text-neutral-300">
-              To join AI Trade you need at least{" "}
-              <span className="font-semibold">$30</span>. Regular deposit min
-              can be lower.
-            </p>
-          </div>
-
-          <div className="rounded-lg border border-neutral-800 p-3">
             <div className="text-sm font-semibold">Withdraw rules</div>
             <p className="text-sm text-neutral-300">
               Network: <span className="font-semibold">TRC20</span>. Minimum
               withdraw <span className="font-semibold">$20</span>, fee{" "}
               <span className="font-semibold">8%</span>. User→User transfer min{" "}
               <span className="font-semibold">$10</span>.
-            </p>
-          </div>
-
-          <div className="rounded-lg border border-neutral-800 p-3">
-            <div className="text-sm font-semibold">
-              Smart Trade profit sharing
-            </div>
-            <p className="text-sm text-neutral-300">
-              You receive <span className="font-semibold">60%</span> of Smart
-              profit. Company receives{" "}
-              <span className="font-semibold">15%</span>; from that flow, upline
-              gets <span className="font-semibold">25%</span>. Upline commission
-              sharing applies (see below).
             </p>
           </div>
 
@@ -240,8 +216,8 @@ export default function SupportPage() {
           <div className="rounded-lg border border-neutral-800 p-3">
             <div className="text-sm font-semibold">Refer bonus</div>
             <p className="text-sm text-neutral-300">
-              Your referral earns a fixed bonus when downline starts Smart
-              Trade.
+              Your referral earns a fixed bonus when a downline starts QX
+              Investment.
             </p>
           </div>
 
@@ -255,7 +231,7 @@ export default function SupportPage() {
         </div>
 
         <div className="mt-4 w-full">
-          <Link href="/business-plan " className={` ${btnPrimary} w-full`}>
+          <Link href="/business-plan" className={` ${btnPrimary} w-full`}>
             Learn more
           </Link>
         </div>

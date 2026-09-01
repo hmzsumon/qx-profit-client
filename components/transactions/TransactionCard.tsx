@@ -18,6 +18,19 @@ interface TransactionCardProps {
   record: TransactionRecord;
 }
 
+/* Display-only relabelling for legacy AI / QX Trade branded purposes. */
+const PURPOSE_LABEL: Record<string, string> = {
+  "Ai Trade Profit": "QX Broker Profit",
+  "Ai Trade Commission": "QX Broker Commission",
+  "Create Ai Account": "Create QX Broker Account",
+  "Add funds to Ai Account": "Add funds to QX Broker Account",
+  "QX Trade Profit": "QX Broker Profit",
+  "QX Trade Commission": "QX Broker Commission",
+  "Create QX Trade Account": "Create QX Broker Account",
+  "Add funds to QX Trade Account": "Add funds to QX Broker Account",
+};
+const labelPurpose = (p: string) => PURPOSE_LABEL[p] ?? p;
+
 const TransactionCard = ({ record }: TransactionCardProps) => {
   const [showDetail, setShowDetail] = useState(false);
 
@@ -54,7 +67,7 @@ const TransactionCard = ({ record }: TransactionCardProps) => {
         </div>
 
         <div className="text-right">
-          <p className={`text-xs font-bold ${resultColor}`}>{record.purpose}</p>
+          <p className={`text-xs font-bold ${resultColor}`}>{labelPurpose(record.purpose)}</p>
           <p className={`${resultColor} text-xs font-bold`}>
             {Number.isFinite(record.amount)
               ? Math.abs(record.amount).toFixed(2)
@@ -84,7 +97,7 @@ const TransactionCard = ({ record }: TransactionCardProps) => {
 
           <div className="flex justify-between">
             <span className="text-gray-500">Purpose</span>
-            <span>{record.purpose}</span>
+            <span>{labelPurpose(record.purpose)}</span>
           </div>
 
           {record.description ? (

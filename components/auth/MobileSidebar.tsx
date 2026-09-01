@@ -25,10 +25,10 @@ export default function MobileSidebar({ open, onClose }: Props) {
     try {
       await logoutUser(undefined).unwrap();
       toast.success("Logout successfully");
-
-      router.push("/");
     } catch (err) {
       toast.error(getErrorMessage(err));
+    } finally {
+      window.location.assign("/");
     }
   };
 

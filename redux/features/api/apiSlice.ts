@@ -40,6 +40,9 @@ export const apiSlice = createApi({
     "SpotWallets",
     "TradeInvestment",
     "TradeInvestmentLogs",
+    "DailyVideos",
+    "Kyc",
+    "Announcements",
   ],
   endpoints: (builder) => ({}),
 });

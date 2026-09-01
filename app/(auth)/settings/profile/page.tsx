@@ -10,13 +10,12 @@ import AccountSummary from "@/components/profile/AccountSummary";
 import AddProfileForm from "@/components/profile/AddProfileForm";
 import VerificationSteps from "@/components/profile/VerificationSteps";
 import VerifyEmailCard from "@/components/profile/VerifyEmailCard";
+import AvatarUpload from "@/components/profile/AvatarUpload";
 import { useGetMyKycQuery } from "@/redux/features/auth/authApi";
-import { go } from "@/redux/features/kyc/kycSlice";
 import { useRouter } from "next/navigation";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function ProfilePage() {
-  const d = useDispatch();
   const router = useRouter();
 
   const { user } = useSelector((state: any) => state.auth);
@@ -49,13 +48,21 @@ export default function ProfilePage() {
   const startKyc = () => {
     if (!step1Done) return;
     if (kycUnderReview || kycVerified) return;
-
-    d(go("start"));
     router.push("/kyc");
   };
 
   return (
     <div className="mx-auto max-w-3xl px-3 py-4 md:px-6 md:py-6">
+      <div className="mb-5 flex items-center gap-4">
+        <AvatarUpload />
+        <div className="min-w-0">
+          <p className="truncate text-base font-semibold text-white">
+            {user?.name || "Your profile"}
+          </p>
+          <p className="truncate text-xs text-neutral-400">{user?.email}</p>
+        </div>
+      </div>
+
       <AccountSummary
         status={
           kycVerified

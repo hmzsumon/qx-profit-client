@@ -424,7 +424,7 @@ export const authApi = apiSlice.injectEndpoints({
         url: "/kyc/me",
         method: "GET",
       }),
-      providesTags: ["User"],
+      providesTags: ["Kyc"],
     }),
 
     /* ────────── save kyc profile ────────── */
@@ -434,7 +434,7 @@ export const authApi = apiSlice.injectEndpoints({
         method: "PUT",
         body,
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["Kyc"],
     }),
 
     /* ────────── submit kyc documents ────────── */
@@ -444,7 +444,25 @@ export const authApi = apiSlice.injectEndpoints({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["Kyc", "User"],
+    }),
+
+    /* ────────── profile picture ────────── */
+    updateAvatar: builder.mutation<{ success: boolean; avatar: string }, FormData>({
+      query: (body) => ({
+        url: "/user/avatar",
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: [{ type: "User", id: "ME" }],
+    }),
+
+    removeAvatar: builder.mutation<{ success: boolean }, void>({
+      query: () => ({
+        url: "/user/avatar",
+        method: "DELETE",
+      }),
+      invalidatesTags: [{ type: "User", id: "ME" }],
     }),
 
     /* ────────── End────────── */
@@ -512,4 +530,6 @@ export const {
   useGetMyKycQuery,
   useSaveKycProfileMutation,
   useSubmitKycDocumentsMutation,
+  useUpdateAvatarMutation,
+  useRemoveAvatarMutation,
 } = authApi;

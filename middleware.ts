@@ -15,7 +15,7 @@ const PUBLIC_ROUTES = [
   "/model-test",
 ];
 
-// ✅ Marketing / info pages — always reachable (logged in OR out), never redirected
+// Marketing / info pages — always reachable (logged in OR out), never redirected.
 const INFO_ROUTES = ["/faq", "/about", "/blog", "/demo"];
 
 const PUBLIC_FILE =
@@ -25,12 +25,12 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get("sw99_token")?.value;
   const { pathname } = request.nextUrl;
 
-  // ✅ API ও preflight একদমই ব্লক করবেন না
+  // Never touch API or preflight.
   if (pathname.startsWith("/api") || request.method === "OPTIONS") {
     return NextResponse.next();
   }
 
-  // ✅ স্ট্যাটিক/পাবলিক অ্যাসেট সবসময় allow
+  // Static / public assets always pass.
   if (
     pathname.startsWith("/_next/static") ||
     pathname.startsWith("/_next/image") ||
@@ -46,36 +46,40 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // ✅ Info/marketing pages — allow through without any auth gate or dashboard bounce
+  // Info / marketing pages — no auth gate, no dashboard bounce.
   if (INFO_ROUTES.includes(pathname)) {
     return NextResponse.next();
   }
 
   const isPublicRoute = PUBLIC_ROUTES.includes(pathname);
 
-  // ✅ টোকেন নেই এবং প্রাইভেট রুট
+  // No token on a private route -> send to the sign-in page.
   if (!token && !isPublicRoute) {
-    // API নয়, কিন্তু non-GET হলে রিডাইরেক্ট না করে 401 দিন (form/XHR সেফটি)
+    // Non-GET: return 401 instead of redirecting (form/XHR safety).
     if (request.method !== "GET") {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
     const url = request.nextUrl.clone();
-    url.pathname = "/register-login?tab=signin";
-    url.searchParams.set("next", pathname);
-    // ✅ 303 দিলে মেথড GET হয়ে যাবে (307 নয়)
+    url.pathname = "/register-login";
+    url.search = "";
+    url.searchParams.set("tab", "signin");
+    // Only remember a real in-app destination (avoid looping back to auth pages).
+    if (pathname && pathname !== "/" && !PUBLIC_ROUTES.includes(pathname)) {
+      url.searchParams.set("next", pathname);
+    }
+    // 303 forces the follow-up request to be a GET.
     return NextResponse.redirect(url, 303);
   }
 
-  // ✅ টোকেন থাকলে পাবলিক পেজে ঢুকতে চাইলে ড্যাশবোর্ডে দিন
-  if (token && isPublicRoute) {
+  // Logged in and visiting an auth page -> go to the dashboard. Home stays public.
+  if (token && isPublicRoute && pathname !== "/") {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
   return NextResponse.next();
 }
 
-// ✅ matcher-এ /api এক্সক্লুড করুন
 export const config = {
   matcher: [
     "/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|manifest.webmanifest|.*\\..*).*)",

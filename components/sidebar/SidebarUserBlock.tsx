@@ -17,9 +17,10 @@ export default function SidebarUserBlock() {
     try {
       await logoutUser(undefined).unwrap();
       toast.success("Logout successfully");
-      router.push("/");
     } catch (err) {
       toast.error(getErrorMessage(err));
+    } finally {
+      window.location.assign("/");
     }
   };
 

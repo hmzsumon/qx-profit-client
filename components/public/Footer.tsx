@@ -3,8 +3,7 @@
 import React from "react";
 import Container from "./Container";
 
-import LogoImg from "@/public/logo/logo_01.png";
-import Logo from "../branding/Logo";
+import BrandLogo from "../branding/BrandLogo";
 
 const Footer: React.FC = () => (
   <footer className="border-t border-neutral-900 bg-neutral-950 py-12 text-neutral-300">
@@ -40,7 +39,7 @@ const Footer: React.FC = () => (
         <div className="flex items-center gap-2 text-sm">
           {/* ── Brand / logo ── */}
           <div>
-            <Logo src={LogoImg} size="xl" width={120} />
+            <BrandLogo size={26} href={null} />
           </div>
         </div>
         <p className="text-xs text-neutral-400">

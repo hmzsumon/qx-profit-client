@@ -1,36 +1,27 @@
-/* ── 08: Under Review screen ───────────────────────────────── */
 "use client";
 
-import { resetKyc } from "@/redux/features/kyc/kycSlice";
-import { useDispatch } from "react-redux";
+import { Clock } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function KycUnderReview() {
-  const d = useDispatch();
+  const router = useRouter();
   return (
     <div className="space-y-6 text-center">
       <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-yellow-400/10 text-yellow-400">
-        <svg viewBox="0 0 24 24" className="h-8 w-8">
-          <path
-            d="M12 7v5l3 3"
-            stroke="currentColor"
-            strokeWidth="2"
-            fill="none"
-          />
-        </svg>
+        <Clock size={30} />
       </div>
-
-      <h1 className="text-2xl font-bold">Your documents are under review</h1>
+      <h1 className="text-2xl font-bold text-white">
+        Your documents are under review
+      </h1>
       <p className="text-neutral-400">
-        This process usually takes from 3 to 7 minutes but might last up to 24
-        hours in special cases. In the meantime you are allowed to deposit,
-        trade and withdraw your profit.
+        Verification usually completes within a few minutes but can take up to 24
+        hours. You can keep using your account meanwhile.
       </p>
-
       <button
-        onClick={() => d(resetKyc())}
-        className="w-full rounded-xl bg-emerald-600 px-4 py-3 font-semibold text-white hover:bg-emerald-500"
+        onClick={() => router.push("/dashboard")}
+        className="w-full rounded-xl bg-emerald-500 px-4 py-3 font-semibold text-neutral-950"
       >
-        Deposit
+        Back to dashboard
       </button>
     </div>
   );

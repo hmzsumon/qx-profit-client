@@ -85,13 +85,13 @@ const FIELD_SCHEMAS: FieldSchema<TeamUser>[] = [
   },
   {
     field: "totalAiTrade",
-    headerName: "Smart Trade (P&L)",
+    headerName: "QX Broker (P&L)",
     width: 150,
     kind: "currency",
   },
   {
     field: "totalAiTradeBalance",
-    headerName: "Smart  Balance",
+    headerName: "QX Broker Balance",
     width: 140,
     kind: "currency",
   },

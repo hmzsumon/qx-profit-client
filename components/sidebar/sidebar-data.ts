@@ -2,12 +2,12 @@
 import type { LucideIcon } from "lucide-react";
 import {
   Bot,
-  ChartCandlestick,
   Clock4,
   Download,
+  FileText,
   Grid2x2,
-  HandCoins,
   LifeBuoy,
+  Megaphone,
   Network,
   Settings,
   ShieldHalf,
@@ -31,43 +31,22 @@ export type NavItem = {
 export const NAV_ITEMS: NavItem[] = [
   { key: "dashboard", label: "Dashboard", icon: Grid2x2, href: "/dashboard" },
   {
-    key: "accounts",
-    label: "Live Accounts",
-    icon: ChartCandlestick,
-    href: "/accounts",
+    key: "announcements",
+    label: "Announcements",
+    icon: Megaphone,
+    href: "/announcements",
   },
   {
     key: "ai-accounts",
-    label: "Smart Trade",
+    label: "QX Broker",
     icon: Bot,
     href: "/ai-accounts",
   },
-
-  {
-    key: "my-staking",
-    label: "My Staking",
-    icon: HandCoins,
-    href: "/my-staking",
-  },
-  // {
-  //   key: "positions",
-  //   label: "My Positions",
-  //   icon: ChartCandlestick,
-
-  //   children: [
-  //     { label: "Open", href: "/positions" },
-
-  //     {
-  //       label: "Closed",
-  //       href: "/closed-positions",
-  //     },
-  //   ],
-  // },
   { key: "deposit", label: "Deposit", icon: Download, href: "/deposit" },
   { key: "withdraw", label: "Withdraw", icon: Upload, href: "/withdraw" },
   {
     key: "trade-investment",
-    label: "Trade Investment",
+    label: "QX Investment",
     icon: TrendingUp,
     href: "/trade-investment",
     badge: "new",
@@ -83,19 +62,19 @@ export const NAV_ITEMS: NavItem[] = [
     label: "Wallet",
     icon: Wallet,
 
-    children: [
-      { label: "Send USDT", href: "/wallet/p2p" },
-      {
-        label: "Internal Transfer",
-        href: "/transfer",
-      },
-    ],
+    href: "/wallet/p2p",
   },
   {
     key: "history",
     label: "Transactions",
     icon: Clock4,
     href: "/transactions",
+  },
+  {
+    key: "business-plan",
+    label: "Business Plan",
+    icon: FileText,
+    href: "/business-plan",
   },
 
   {

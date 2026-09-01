@@ -1,7 +1,6 @@
 "use client";
 
 import { formatBalance } from "@/lib/functions";
-import LogoImg from "@/public/logo/logo_01.png";
 import {
   Bell,
   ChevronDown,
@@ -17,7 +16,7 @@ import NotificationDrawer from "./NotificationDrawer";
 import UserMenu from "./UserMenu";
 /* ────────── add: unread count hook ────────── */
 import { useGetMyUnreadNotificationsCountQuery } from "@/redux/features/notifications/notificationApi";
-import Logo from "../branding/Logo";
+import BrandLogo from "../branding/BrandLogo";
 
 /* ────────── Props: what Header receives ────────── */
 type Props = {
@@ -92,7 +91,7 @@ export default function Header({ open, onToggle }: Props) {
 
           {/* ── Brand / logo ── */}
           <div>
-            <Logo src={LogoImg} size="xl" width={120} />
+            <BrandLogo size={28} href="/dashboard" />
           </div>
         </div>
 
@@ -165,11 +164,20 @@ export default function Header({ open, onToggle }: Props) {
               }}
               aria-haspopup="menu"
               aria-expanded={userOpen}
-              className={`rounded-lg p-2 text-neutral-300 hover:bg-neutral-900 hover:text-white ${
+              className={`rounded-lg p-1 text-neutral-300 hover:bg-neutral-900 hover:text-white ${
                 userOpen ? "ring-1 ring-neutral-700" : ""
               }`}
             >
-              <CircleUserRound size={20} />
+              {user?.avatar ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={user.avatar}
+                  alt="Profile"
+                  className="h-7 w-7 rounded-full object-cover"
+                />
+              ) : (
+                <CircleUserRound size={20} />
+              )}
             </button>
             {/* ── User dropdown content ── */}
             <UserMenu open={userOpen} />

@@ -45,7 +45,7 @@ export default function QxCountrySelect({ value, onChange }: Props) {
             displayValue={(v: string | null) => v ?? ""}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search"
-            className="w-full bg-transparent text-sm text-white outline-none placeholder:text-gray-500"
+            className="w-full appearance-none border-0 bg-transparent p-0 text-sm text-white shadow-none outline-none ring-0 focus:ring-0 placeholder:text-gray-500"
           />
           <Combobox.Button className="ml-2 text-gray-400">
             <ChevronDown size={16} />
@@ -62,16 +62,12 @@ export default function QxCountrySelect({ value, onChange }: Props) {
                 key={o.iso2 || o.value}
                 value={o.value}
                 className={({ active }) =>
-                  `flex cursor-pointer items-center gap-2 px-3 py-2 text-sm ${
+                  `cursor-pointer truncate px-3 py-2 text-sm ${
                     active ? "bg-[#2e90fa]/15 text-white" : "text-gray-200"
                   }`
                 }
               >
-                <span className="text-base">{o.flag}</span>
-                <span className="flex-1 truncate">{o.value}</span>
-                <span className="text-[10px] uppercase text-gray-500">
-                  {o.iso2}
-                </span>
+                {o.value}
               </Combobox.Option>
             ))
           )}

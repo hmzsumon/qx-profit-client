@@ -1,6 +1,7 @@
 "use client";
 
 import Header from "@/components/auth/Header";
+import KycStatusBanner from "@/components/kyc/KycStatusBanner";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { DesktopSidebar, MobileSidebar } from "../sidebar";
@@ -31,7 +32,10 @@ export default function DashboardLayout({
           <DesktopSidebar />
         </aside>
 
-        <main className="min-h-[calc(100dvh-4rem)] px-4 ">{children}</main>
+        <main className="min-h-[calc(100dvh-4rem)] px-4 ">
+          <KycStatusBanner />
+          {children}
+        </main>
       </div>
 
       {/* mobile drawer (starts just below header) */}

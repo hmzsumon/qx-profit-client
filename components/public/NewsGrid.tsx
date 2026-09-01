@@ -11,7 +11,7 @@ import Container from "./Container";
 import SectionTitle from "./SectionTitle";
 
 const items = [
-  { title: "Can trade manually and can also do Smart trade", img: trade1 },
+  { title: "Trade on the QX Broker platform", img: trade1 },
   { title: "Upbit Trade Affiliate Guide & Program", img: trade2 },
   { title: "Instant withdrawals: fast and convenient processing", img: trade3 },
 ];

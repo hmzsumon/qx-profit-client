@@ -1,37 +1,36 @@
-/* ────────── comments ────────── */
-/* Matches backend RankSummaryResponse from your service/controller. */
-/* ────────── comments ────────── */
-export type RankKey =
-  | "bronze"
-  | "silver"
-  | "gold"
-  | "platinum"
-  | "diamond"
-  | "emerald"
-  | "grandmaster";
+/* Matches backend RankSummaryResponse from the rank service. */
 
-export interface RankProgress {
-  directRef: number;
-  invested: number;
-  directPct: number;
-  investPct: number;
-  overall: number;
+export type RankKey = string;
+
+export interface RankLevelBreakdown {
+  level: number;
+  members: number;
+  volume: number;
+  pct: number; // 0..1
+}
+
+export interface RankTierProgress {
+  teamVolume: number;
+  target: number;
+  pct: number; // 0..1
+  remaining: number;
+  overall: number; // 0..100
 }
 
 export interface RankSummaryItem {
   key: RankKey;
-  title: string;
-  directRefTarget: number;
-  minInvestTarget: number;
+  name: string;
+  targetVolume: number;
   rewardUsd: number;
-  progress: RankProgress;
+  sortOrder: number;
+  progress: RankTierProgress;
   qualified: boolean;
   claimed: boolean;
-  achievedAt?: string;
   claimedAt?: string;
 }
 
 export interface RankSummaryResponse {
-  overall: { directRef: number; invested: number };
+  overall: { teamVolume: number };
+  levels: RankLevelBreakdown[];
   ranks: RankSummaryItem[];
 }

@@ -38,8 +38,11 @@ export default function WithdrawPage() {
   // Local form state
   const [amount, setAmount] = useState<string>("");
   const [walletAddress, setWalletAddress] = useState<string>("");
+  const [method, setMethod] = useState<"crypto" | "binance">("crypto");
   const [network, setNetwork] = useState<"TRC20" | "BEP20">("TRC20");
   const [amountError, setAmountError] = useState<string>("");
+
+  const isBinance = method === "binance";
 
   // OTP Drawer
   const [verifyOpen, setVerifyOpen] = useState(false);
@@ -101,7 +104,15 @@ export default function WithdrawPage() {
       return;
     }
     if (!walletAddress) {
-      toast.error("Please enter your wallet address");
+      toast.error(
+        isBinance
+          ? "Please enter your Binance Pay ID / UID"
+          : "Please enter your wallet address",
+      );
+      return;
+    }
+    if (isBinance && !/^[A-Za-z0-9_-]{6,32}$/.test(walletAddress.trim())) {
+      toast.error("Enter a valid Binance Pay ID / UID");
       return;
     }
     if (user?.is_withdraw_block) {
@@ -117,8 +128,8 @@ export default function WithdrawPage() {
   const handleRequestWithdraw = () => {
     const payload = {
       amount: parseFloat(amount),
-      withdrawAddress: walletAddress,
-      network,
+      withdrawAddress: walletAddress.trim(),
+      network: isBinance ? "BINANCE_PAY" : network,
       withdrawFee,
       receiptAmount: actualReceipt,
     };
@@ -285,19 +296,27 @@ export default function WithdrawPage() {
                 )}
               </div>
 
-              {/* network */}
+              {/* withdraw method */}
               <div>
                 <label className="mb-2 block text-sm font-medium text-neutral-200">
-                  Select network
+                  Withdrawal method
                 </label>
                 <div className="grid grid-cols-2 gap-2">
-                  {(["TRC20", "BEP20"] as const).map((n) => {
-                    const active = network === n;
+                  {(
+                    [
+                      ["crypto", "Crypto"],
+                      ["binance", "Binance Pay"],
+                    ] as const
+                  ).map(([key, label]) => {
+                    const active = method === key;
                     return (
                       <button
-                        key={n}
+                        key={key}
                         type="button"
-                        onClick={() => setNetwork(n)}
+                        onClick={() => {
+                          setMethod(key);
+                          setWalletAddress("");
+                        }}
                         className={[
                           "rounded-xl border px-4 py-2 text-sm transition",
                           active
@@ -305,26 +324,68 @@ export default function WithdrawPage() {
                             : "border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:border-neutral-700",
                         ].join(" ")}
                       >
-                        {n}
+                        {label}
                       </button>
                     );
                   })}
                 </div>
               </div>
 
-              {/* wallet addr */}
+              {/* network (crypto only) */}
+              {!isBinance && (
+                <div>
+                  <label className="mb-2 block text-sm font-medium text-neutral-200">
+                    Select network
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    {(["TRC20", "BEP20"] as const).map((n) => {
+                      const active = network === n;
+                      return (
+                        <button
+                          key={n}
+                          type="button"
+                          onClick={() => setNetwork(n)}
+                          className={[
+                            "rounded-xl border px-4 py-2 text-sm transition",
+                            active
+                              ? "border-emerald-700/50 bg-emerald-500/10 text-emerald-300 ring-1 ring-emerald-700/30"
+                              : "border-neutral-800 bg-neutral-900/60 text-neutral-300 hover:border-neutral-700",
+                          ].join(" ")}
+                        >
+                          {n}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* destination */}
               <div>
                 <label className="mb-2 block text-sm font-medium text-neutral-200">
-                  {network} wallet address
+                  {isBinance
+                    ? "Binance Pay ID / UID"
+                    : `${network} wallet address`}
                 </label>
                 <input
                   type="text"
                   value={walletAddress}
                   onChange={(e) => setWalletAddress(e.target.value)}
-                  placeholder={`Paste ${network} address`}
+                  placeholder={
+                    isBinance
+                      ? "Enter your Binance Pay ID or UID"
+                      : `Paste ${network} address`
+                  }
                   className="w-full rounded-lg border border-neutral-800 bg-neutral-900/70 px-3 py-2.5 font-mono text-sm text-neutral-100 outline-none placeholder:text-neutral-500 focus:ring-2 focus:ring-emerald-600/40"
                   required
                 />
+                {isBinance && (
+                  <p className="mt-1.5 flex items-start gap-1 text-xs text-yellow-400">
+                    <FiInfo className="mt-0.5 shrink-0" />
+                    Use your own Binance account ID. A wrong ID may cause the
+                    payout to be lost.
+                  </p>
+                )}
               </div>
 
               {/* submit */}

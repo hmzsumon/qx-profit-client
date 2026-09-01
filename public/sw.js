@@ -4,13 +4,13 @@ self.addEventListener("push", (event) => {
   try {
     const data = event.data ? event.data.json() : {};
     const {
-      title = "Orex Trade",
+      title = "QX Profit",
       body = "You have a new update.",
       icon = "/icons/icon-192.png",
       badge = "/icons/badge-72.png",
       image,
-      url = "https://www.capitalisegfx.com/notifications",
-      tag = "orex-trade",
+      url = "https://www.qxprofit.com/notifications",
+      tag = "qx-profit",
       requireInteraction = false,
       actions = [
         { action: "open", title: "Open", icon: "/icons/action-open.png" },
@@ -42,11 +42,11 @@ self.addEventListener("push", (event) => {
     event.waitUntil(self.registration.showNotification(title, opts));
   } catch {
     event.waitUntil(
-      self.registration.showNotification("Orex Trade", {
+      self.registration.showNotification("QX Profit", {
         body: "You have a new notification.",
         icon: "/icons/icon-192.png",
         badge: "/icons/badge-72.png",
-      })
+      }),
     );
   }
 });
@@ -54,7 +54,7 @@ self.addEventListener("push", (event) => {
 /* ────────── notification click: focus/open tab ────────── */
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
-  const url = event.notification?.data?.url || "https://www.capitalisegfx.com";
+  const url = event.notification?.data?.url || "https://www.qxprofit.com";
 
   if (event.action === "dismiss") return;
 
@@ -71,6 +71,6 @@ self.addEventListener("notificationclick", (event) => {
         }
       }
       return clients.openWindow(url);
-    })()
+    })(),
   );
 });

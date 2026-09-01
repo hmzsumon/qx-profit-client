@@ -9,14 +9,12 @@ const KpiGrid: React.FC<{
   countOfReferring: string; // already formatted text
   activeUsers: string;
   totalReferralIncome: string; // $
-  level1AiTradeBalance: string; // $
-  level1LiveTradeBalance: string; // $
+  level1AiTradeBalance?: string;
+  level1LiveTradeBalance?: string;
 }> = ({
   loading = false,
   countOfReferring,
   totalReferralIncome,
-  level1AiTradeBalance,
-  level1LiveTradeBalance,
   activeUsers,
 }) => {
   const v = (t: string) => (loading ? "…" : t);
@@ -45,18 +43,6 @@ const KpiGrid: React.FC<{
         title="Total Referral income"
         value={v(totalReferralIncome)}
         icon="chart"
-      />
-      <KpiTile
-        tone="amber"
-        title="1st level Smart trade balance"
-        value={v(level1AiTradeBalance)}
-        icon="wallet"
-      />
-      <KpiTile
-        tone="green"
-        title="1st level Live trade balance"
-        value={v(level1LiveTradeBalance)}
-        icon="cash"
       />
     </section>
   );

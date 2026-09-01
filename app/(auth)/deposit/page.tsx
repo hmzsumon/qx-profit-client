@@ -9,6 +9,7 @@ import DepositItemCard, {
 } from "@/components/deposit/DepositItemCard";
 
 // ── import svg icons as React components (SVGR) ──────────────
+import BinanceIcon from "@/public/images/deposit/binance.svg";
 import BtcIcon from "@/public/images/deposit/bitcoin.svg";
 import CardIcon from "@/public/images/deposit/card.svg";
 import EthIcon from "@/public/images/deposit/ethereum.svg";
@@ -26,6 +27,17 @@ const ALL_ITEMS: DepositItem[] = [
     limits: "10 – 200,000 USD",
     status: "available",
     tags: ["Crypto", "TRON"],
+  },
+  {
+    key: "binance-payment",
+    name: "Binance Pay",
+    Icon: BinanceIcon,
+    colorClass: "text-[#F0B90B]",
+    processing: "Instant (auto-verified)",
+    fee: "0%",
+    limits: "10 – 200,000 USD",
+    status: "available",
+    tags: ["Crypto"],
   },
 
   {

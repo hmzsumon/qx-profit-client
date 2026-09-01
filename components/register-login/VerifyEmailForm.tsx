@@ -150,7 +150,7 @@ const VerifyEmailForm: React.FC<{ onSuccess?: () => void }> = ({
       const res = await verifyEmail({ email, code }).unwrap();
       toast.success(res?.message || "Email verified", { id: tId });
       onSuccess?.();
-      router.push("/register-login");
+      router.push("/register-login?tab=signin");
     } catch (e: any) {
       toast.error(e?.data?.message || e?.message || "Verification failed", {
         id: tId,

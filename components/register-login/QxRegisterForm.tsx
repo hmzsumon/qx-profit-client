@@ -18,6 +18,7 @@ import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 import { useRegisterUserMutation } from "@/redux/features/auth/authApi";
+import { ChevronDown } from "lucide-react";
 import QxCountrySelect from "./QxCountrySelect";
 import {
   QxCheckbox,
@@ -27,11 +28,9 @@ import {
   QxSocialSignIn,
   QxSubmit,
 } from "./QxUI";
-import {
-  QX_CURRENCIES,
-  qxRegisterSchema,
-  type QxRegisterValues,
-} from "./qxSchemas";
+import { qxRegisterSchema, type QxRegisterValues } from "./qxSchemas";
+
+const FIXED_CURRENCY = "USDT";
 
 const QxRegisterForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => {
   const router = useRouter();
@@ -47,9 +46,10 @@ const QxRegisterForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => 
     mode: "onTouched",
     defaultValues: {
       country: "",
-      currency: "USD",
+      currency: FIXED_CURRENCY,
       email: "",
       password: "",
+      confirmPassword: "",
       promoCode: "",
       ageAndAgreement: false,
       notUSTaxPayer: false,
@@ -65,9 +65,9 @@ const QxRegisterForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => 
         name: derivedName,
         email: values.email.trim().toLowerCase(),
         password: values.password,
-        confirmPassword: values.password,
+        confirmPassword: values.confirmPassword,
         country: values.country,
-        currency: values.currency,
+        currency: FIXED_CURRENCY,
         partnerCode: values.promoCode || "",
         promoCode: values.promoCode || "",
         notUSTaxPayer: values.notUSTaxPayer,
@@ -99,19 +99,11 @@ const QxRegisterForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => 
         />
       </QxField>
 
-      {/* ── Currency ── */}
-      <QxField label="Currency" error={errors.currency?.message}>
-        <div className="relative">
-          <select
-            {...register("currency")}
-            className="w-full appearance-none bg-transparent px-3.5 py-3.5 text-sm text-white outline-none"
-          >
-            {QX_CURRENCIES.map((c) => (
-              <option key={c} value={c} className="bg-[#252c3d] text-white">
-                {c}
-              </option>
-            ))}
-          </select>
+      {/* ── Currency (fixed to USDT) ── */}
+      <QxField label="Currency">
+        <div className="flex w-full items-center justify-between px-3.5 py-3.5 text-sm text-white">
+          <span>{FIXED_CURRENCY}</span>
+          <ChevronDown size={16} className="text-gray-400" />
         </div>
       </QxField>
 
@@ -125,6 +117,17 @@ const QxRegisterForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => 
         <QxPasswordInput
           autoComplete="new-password"
           {...register("password")}
+        />
+      </QxField>
+
+      {/* ── Confirm password ── */}
+      <QxField
+        label="Confirm password"
+        error={errors.confirmPassword?.message}
+      >
+        <QxPasswordInput
+          autoComplete="new-password"
+          {...register("confirmPassword")}
         />
       </QxField>
 

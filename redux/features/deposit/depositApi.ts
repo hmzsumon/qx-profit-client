@@ -57,6 +57,27 @@ export const depositApi = apiSlice.injectEndpoints({
     getPaymentMethodByName: builder.query<any, string>({
       query: (methodName) => `/payment-methods/${methodName}`,
     }),
+
+    /* ────────── Binance Pay receiver info (for the deposit page) ────────── */
+    getBinancePayInfo: builder.query<
+      { success: boolean; receiverId: string },
+      void
+    >({
+      query: () => "/binance/pay-info",
+    }),
+
+    /* ────────── confirm / retry a pending Binance Pay deposit ────────── */
+    confirmBinanceDeposit: builder.mutation<
+      any,
+      { depositId: string; orderId: string }
+    >({
+      query: ({ depositId, orderId }) => ({
+        url: `/binance-payment/${depositId}/retry`,
+        method: "POST",
+        body: { orderId },
+      }),
+      invalidatesTags: ["User", "Deposits"],
+    }),
   }),
 });
 
@@ -66,6 +87,8 @@ export const {
   useGetDepositQuery,
   useGetActiveDepositMethodQuery,
   useDepositWithBinanceMutation,
+  useConfirmBinanceDepositMutation,
+  useGetBinancePayInfoQuery,
   useGetPaymentMethodsQuery,
   useCreateDepositWithBDTMutation,
   useGetPaymentMethodByNameQuery,

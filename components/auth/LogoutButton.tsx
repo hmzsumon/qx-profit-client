@@ -1,12 +1,10 @@
 import { useLogoutUserMutation } from "@/redux/features/auth/authApi";
 import { closeUserSidebar } from "@/redux/features/ui/sidebarSlice";
-import { useRouter } from "next/navigation";
 import React from "react";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 
 const LogoutButton: React.FC<{ onLogout?: () => void }> = ({ onLogout }) => {
-  const router = useRouter();
   const dispatch = useDispatch();
   const [showLogoutConfirm, setShowLogoutConfirm] = React.useState(false);
 
@@ -14,12 +12,12 @@ const LogoutButton: React.FC<{ onLogout?: () => void }> = ({ onLogout }) => {
   const handleLogout = () => {
     logoutUser(undefined)
       .unwrap()
-      .then(() => {
-        router.push("/login"); // Redirect to login page after logout
-        dispatch(closeUserSidebar()); // Close the sidebar
-      })
-      .catch((err) => {
-        console.error("Logout failed:", err);
+      .catch((err) => console.error("Logout failed:", err))
+      .finally(() => {
+        dispatch(closeUserSidebar());
+        // Hard navigation to the home page: clears RTK cache and re-runs
+        // middleware with the cleared auth cookie.
+        window.location.assign("/");
       });
     setShowLogoutConfirm(false);
   };
