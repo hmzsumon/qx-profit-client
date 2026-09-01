@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.qxprofit.app",
+        "sha256_cert_fingerprints": ["21:43:99:5F:23:64:99:EE:E8:01:60:E5:6A:18:E6:63:2D:2F:79:84:09:69:53:64:97:16:90:49:60:71:3B:4B"]
+      }
+    }]
