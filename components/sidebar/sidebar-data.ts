@@ -11,6 +11,7 @@ import {
   Network,
   Settings,
   ShieldHalf,
+  Smartphone,
   SquareGanttChart,
   TrendingUp,
   Upload,
@@ -75,6 +76,12 @@ export const NAV_ITEMS: NavItem[] = [
     label: "Business Plan",
     icon: FileText,
     href: "/business-plan",
+  },
+  {
+    key: "download-app",
+    label: "Download App",
+    icon: Smartphone,
+    href: "/download-app",
   },
 
   {
