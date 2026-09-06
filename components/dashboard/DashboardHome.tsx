@@ -9,7 +9,7 @@ import AnnouncementBanner from "@/components/announcements/AnnouncementBanner";
 import DailyVideoHistory from "@/components/dashboard/DailyVideoHistory";
 import DailyVideoPlayer from "@/components/dashboard/DailyVideoPlayer";
 import KycStatusChip from "@/components/kyc/KycStatusChip";
-import Avatar from "@/components/ui/Avatar";
+import Avatar from "@/components/ui/avatar";
 import { formatBalance } from "@/lib/functions";
 import { useGetDailyVideosQuery } from "@/redux/features/daily-video/dailyVideoApi";
 import { useGetProfitLeaderboardQuery } from "@/redux/features/leaderboard/leaderboardApi";

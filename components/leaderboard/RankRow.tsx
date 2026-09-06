@@ -1,7 +1,7 @@
 /* ────────── Profit ranking — single row ────────── */
 "use client";
 
-import Avatar from "@/components/ui/Avatar";
+import Avatar from "@/components/ui/avatar";
 import type { ProfitRankRow } from "@/redux/features/leaderboard/leaderboardApi";
 
 const usd = (v: number) =>

@@ -18,7 +18,7 @@ import UserMenu from "./UserMenu";
 /* ────────── add: unread count hook ────────── */
 import { useGetMyUnreadNotificationsCountQuery } from "@/redux/features/notifications/notificationApi";
 import BrandLogo from "../branding/BrandLogo";
-import Avatar from "../ui/Avatar";
+import Avatar from "../ui/avatar";
 
 /* ────────── Props: what Header receives ────────── */
 type Props = {
