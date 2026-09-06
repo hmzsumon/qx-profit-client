@@ -13,14 +13,15 @@ import {
   TrendingUp,
   XCircle,
 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import StatCard from "./StatCard";
+import InvestmentActivity from "./InvestmentActivity";
 
 const fmt = (v: number) =>
-  `${Number(v || 0).toLocaleString(undefined, { maximumFractionDigits: 8 })} USDT`;
-const toDate = (v?: string) => (v ? new Date(v).toLocaleString() : "No lock");
+  `${Number(v || 0).toLocaleString("en-US", { maximumFractionDigits: 8 })} USDT`;
+const toDate = (v?: string) => (v ? new Date(v).toLocaleString("en-US") : "No lock");
 
 const LOG_LABEL: Record<string, string> = {
   transfer_in: "Deposit",
@@ -33,23 +34,34 @@ const LOG_LABEL: Record<string, string> = {
 
 export default function TradeInvestmentScreen() {
   const { user } = useSelector((state: any) => state.auth);
-  const { data, isLoading } = useGetMyTradeInvestmentQuery();
+  const { data, isLoading, isError, refetch } = useGetMyTradeInvestmentQuery(undefined, {
+    pollingInterval: 30000, refetchOnFocus: true, refetchOnReconnect: true,
+  });
   const [transferIn, inState] = useTransferToTradeInvestmentMutation();
   const [transferOut, outState] = useTransferFromTradeInvestmentMutation();
   const [cancelInvestment, cancelState] = useCancelTradeInvestmentMutation();
   const [amount, setAmount] = useState("");
   const [confirmCancel, setConfirmCancel] = useState(false);
+  const [now, setNow] = useState(0);
+  useEffect(() => {
+    setNow(Date.now());
+    const timer = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   const account = data?.account;
   const config = data?.config;
+  const hasActiveInvestment = account?.status === "active" && Number(account.balance) > 0;
 
   // Referral bonus rows are upline income and are not shown on the investor's own history.
   const logs = (data?.logs ?? []).filter((log) => log.type !== "generation_bonus");
 
   const locked = useMemo(() => {
     if (!account?.lockUntil) return false;
-    return new Date(account.lockUntil).getTime() > Date.now();
-  }, [account?.lockUntil]);
+    return new Date(account.lockUntil).getTime() > now;
+  }, [account?.lockUntil, now]);
+
+  const busy = inState.isLoading || outState.isLoading || cancelState.isLoading;
 
   const canCancel = !!account && account.status !== "cancelled" && (account.balance || 0) > 0 && !locked;
   const cancelCharge = useMemo(() => {
@@ -60,10 +72,11 @@ export default function TradeInvestmentScreen() {
   const submitIn = async () => {
     const n = Number(amount);
     if (!Number.isFinite(n) || n <= 0) return toast.error("Enter a valid amount");
+    if (n < Number(config?.minAmount ?? 10)) return toast.error(`Minimum investment amount is ${config?.minAmount ?? 10} USDT`);
     try {
       await toast.promise(transferIn({ amount: n }).unwrap(), {
         loading: "Processing...",
-        success: "QX Investment activated",
+        success: "Funds added to QX Investment",
         error: (e: any) => e?.data?.message || "Transfer failed",
       });
       setAmount("");
@@ -95,7 +108,8 @@ export default function TradeInvestmentScreen() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f141b] px-3 py-5 text-white md:px-6">
+    <div className="min-h-screen min-w-0 bg-[#0f141b] px-1 py-5 text-white [contain:inline-size] sm:px-3 md:px-6">
+      {isError && <div role="alert" className="mb-4 rounded-2xl border border-amber-400/20 bg-amber-500/10 p-4 text-sm text-amber-200">Account data could not be refreshed. <button onClick={() => refetch()} className="min-h-10 underline">Try again</button></div>}
       {/* Header */}
       <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-emerald-500/15 via-sky-500/10 to-white/5 p-5 shadow-2xl">
         <div className="flex items-start justify-between gap-3">
@@ -104,8 +118,8 @@ export default function TradeInvestmentScreen() {
             <h1 className="mt-1 text-2xl font-black">Daily profit investment</h1>
             <p className="mt-2 max-w-2xl text-sm text-white/60">
               Start from {config?.minAmount ?? 10} USDT. Your principal stays locked for{" "}
-              {config?.lockDays ?? 7} days. Daily profit between 1% and 4% is credited to your
-              main balance by the admin.
+              {config?.lockDays ?? 7} days. Track the live market and your daily profit estimate.
+              Profit is credited to your main balance after scheduled processing.
             </p>
           </div>
           <div
@@ -126,9 +140,11 @@ export default function TradeInvestmentScreen() {
       <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4">
         <StatCard label="Main Balance" value={fmt(user?.m_balance || 0)} tone="blue" />
         <StatCard label="Investment Balance" value={fmt(account?.balance || 0)} tone="green" />
-        <StatCard label="Daily Profit Rate" value="1% - 4%" tone="amber" />
+        <StatCard label="Selected Daily Rate" value={config ? `${config.dailyProfitPercent > 0 ? Math.min(4, Math.max(1, config.dailyProfitPercent)) : 0}%` : "—"} tone="amber" />
         <StatCard label="Total Profit" value={fmt(account?.totalUserProfit || 0)} />
       </div>
+
+      {now > 0 && hasActiveInvestment && <InvestmentActivity account={account} config={config} now={now} loading={isLoading} stale={isError} />}
 
       {/* Transfer */}
       <div className="mt-4 rounded-3xl border border-white/10 bg-white/[0.04] p-4">
@@ -136,22 +152,25 @@ export default function TradeInvestmentScreen() {
           <TrendingUp size={20} /> Manage Investment
         </div>
         <input
+          aria-label="Investment transfer amount in USDT"
+          inputMode="decimal"
           value={amount}
           onChange={(e) => setAmount(e.target.value.replace(/[^0-9.]/g, ""))}
           placeholder={`Minimum ${config?.minAmount ?? 10} USDT`}
           className="w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-white outline-none focus:border-emerald-400"
         />
+        <p className="mt-2 text-xs leading-relaxed text-white/50">You can add {config?.minAmount ?? 10} USDT or more at any time, including while locked. Each addition restarts the {config?.lockDays ?? 7}-day lock for your entire investment balance.</p>
         <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
           <button
             onClick={submitIn}
-            disabled={inState.isLoading}
+            disabled={busy || isLoading || isError || !config?.isActive}
             className="flex items-center justify-center gap-2 rounded-2xl bg-emerald-500 px-4 py-3 font-bold text-black disabled:opacity-60"
           >
             <ArrowDownToLine size={18} /> Add to Investment
           </button>
           <button
             onClick={submitOut}
-            disabled={locked || outState.isLoading}
+            disabled={locked || busy || isLoading || isError}
             className="flex items-center justify-center gap-2 rounded-2xl bg-sky-500 px-4 py-3 font-bold text-black disabled:opacity-50"
           >
             <ArrowUpFromLine size={18} /> Withdraw to Main
@@ -163,7 +182,7 @@ export default function TradeInvestmentScreen() {
           </span>
           <button
             onClick={() => setConfirmCancel(true)}
-            disabled={!canCancel}
+            disabled={!canCancel || busy || isError}
             className="flex items-center gap-1 rounded-lg border border-red-400/40 px-3 py-1.5 font-semibold text-red-300 disabled:opacity-40"
           >
             <XCircle size={14} /> Cancel Investment
@@ -203,7 +222,7 @@ export default function TradeInvestmentScreen() {
         ) : logs.length === 0 ? (
           <p className="text-white/50">No history found.</p>
         ) : (
-          <div className="overflow-x-auto">
+          <><div className="space-y-3 md:hidden">{logs.map(log => <div key={log._id} className="rounded-xl border border-white/10 bg-black/15 p-3"><div className="flex flex-wrap items-start justify-between gap-2"><span className="text-sm font-semibold">{LOG_LABEL[log.type] ?? log.type}</span><span className="break-all text-sm font-semibold text-emerald-300">{fmt(log.amount)}</span></div><p className="mt-2 text-xs text-white/45">{new Date(log.createdAt).toLocaleString("en-US")}{log.percentSnapshot ? ` · ${log.percentSnapshot}%` : ""}</p>{log.note && <p className="mt-2 break-words text-xs text-white/55">{log.note}</p>}</div>)}</div><div className="hidden overflow-x-auto md:block">
             <table className="w-full min-w-[720px] text-left text-sm">
               <thead className="text-white/50">
                 <tr>
@@ -217,7 +236,7 @@ export default function TradeInvestmentScreen() {
               <tbody>
                 {logs.map((log) => (
                   <tr key={log._id} className="border-t border-white/10">
-                    <td className="py-3">{new Date(log.createdAt).toLocaleString()}</td>
+                    <td className="py-3">{new Date(log.createdAt).toLocaleString("en-US")}</td>
                     <td>{LOG_LABEL[log.type] ?? log.type}</td>
                     <td>{fmt(log.amount)}</td>
                     <td>{log.percentSnapshot ? `${log.percentSnapshot}%` : "-"}</td>
@@ -226,7 +245,7 @@ export default function TradeInvestmentScreen() {
                 ))}
               </tbody>
             </table>
-          </div>
+          </div></>
         )}
       </div>
 

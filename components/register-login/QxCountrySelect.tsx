@@ -63,7 +63,7 @@ export default function QxCountrySelect({ value, onChange }: Props) {
                 value={o.value}
                 className={({ active }) =>
                   `cursor-pointer truncate px-3 py-2 text-sm ${
-                    active ? "bg-[#2e90fa]/15 text-white" : "text-gray-200"
+                    active ? "bg-[#2E7DF6]/15 text-white" : "text-gray-200"
                   }`
                 }
               >

@@ -46,7 +46,7 @@ const QxAboutInnovation: React.FC = () => (
       <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
         <Link
           href="/register-login?tab=create"
-          className="rounded-lg bg-[#12b76a] px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-[#0fa762]"
+          className="rounded-lg bg-[#2E7DF6] px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-[#1E6FE0]"
         >
           Open real account
         </Link>

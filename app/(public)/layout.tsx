@@ -13,7 +13,7 @@ const PublicLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className="min-h-screen bg-[#161b27] text-white">
+    <div className="min-h-screen bg-[#0B1220] text-white">
       {/* ── Global navbar (fixed, h-16) ── */}
       <QxNavbar />
 

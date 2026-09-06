@@ -18,7 +18,7 @@ export default function UserMenu({ open }: { open: boolean }) {
     } catch (err) {
       toast.error(getErrorMessage(err));
     } finally {
-      window.location.assign("/");
+      window.location.assign("/register-login?tab=signin");
     }
   };
 

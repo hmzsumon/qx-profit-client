@@ -1,36 +1,27 @@
-/* ────────── QX PROFIT — Home Page (modular assembly) ────────── */
+/* ────────── QX PROFIT — Home Page (partner-program layout) ────────── */
 
-import QxHero from "@/components/public/QxHero";
-import QxFeaturesGrid from "@/components/public/QxFeaturesGrid";
-import QxDemoBanner from "@/components/public/QxDemoBanner";
-import QxPredictions from "@/components/public/QxPredictions";
-import QxTestimonials from "@/components/public/QxTestimonials";
-import QxMobileApp from "@/components/public/QxMobileApp";
-import QxFAQ from "@/components/public/QxFAQ";
+import PartnerHero from "@/components/public/partner/PartnerHero";
+import PartnerPayoutStrip from "@/components/public/partner/PartnerPayoutStrip";
+import PartnerEarnWays from "@/components/public/partner/PartnerEarnWays";
+import PartnerEasyProfitable from "@/components/public/partner/PartnerEasyProfitable";
+import PartnerLevelCards from "@/components/public/partner/PartnerLevelCards";
+import PartnerOpportunities from "@/components/public/partner/PartnerOpportunities";
+import PartnerReviews from "@/components/public/partner/PartnerReviews";
+import PartnerCollaboration from "@/components/public/partner/PartnerCollaboration";
+import PartnerSupportCta from "@/components/public/partner/PartnerSupportCta";
 
 export default function QxProfitHome(): JSX.Element {
   return (
     <>
-      {/* ── 1. Hero — headline + platform screenshot ── */}
-      <QxHero />
-
-      {/* ── 2. Features — 6-card platform features grid ── */}
-      <QxFeaturesGrid />
-
-      {/* ── 3. Demo banner — "no registration required" CTA strip ── */}
-      <QxDemoBanner />
-
-      {/* ── 4. Predictions — pitch + 4 trading steps ── */}
-      <QxPredictions />
-
-      {/* ── 5. Testimonials — 6-review grid with ratings ── */}
-      <QxTestimonials />
-
-      {/* ── 6. Mobile app — rating badge + store badges ── */}
-      <QxMobileApp />
-
-      {/* ── 7. FAQ — teaser accordion + link to full page ── */}
-      <QxFAQ />
+      <PartnerHero />
+      <PartnerPayoutStrip />
+      <PartnerEarnWays />
+      <PartnerEasyProfitable />
+      <PartnerLevelCards />
+      <PartnerOpportunities />
+      <PartnerReviews />
+      <PartnerCollaboration />
+      <PartnerSupportCta />
     </>
   );
 }

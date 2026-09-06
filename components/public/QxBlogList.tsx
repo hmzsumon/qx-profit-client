@@ -73,7 +73,7 @@ const QxBlogList: React.FC = () => (
             className="flex flex-col rounded-2xl border border-white/[0.05] bg-[#1c2230] p-6"
           >
             <div className="flex items-center gap-2 text-xs">
-              <span className="rounded-full bg-[#12b76a]/15 px-2.5 py-0.5 font-semibold text-[#12b76a]">
+              <span className="rounded-full bg-[#2E7DF6]/15 px-2.5 py-0.5 font-semibold text-[#2E7DF6]">
                 {p.category}
               </span>
               <span className="text-gray-500">{p.date}</span>
@@ -86,7 +86,7 @@ const QxBlogList: React.FC = () => (
             </p>
             <Link
               href="/register-login?tab=create"
-              className="mt-4 inline-flex items-center gap-1 text-[13px] font-semibold text-[#4c9ffb] hover:text-[#7bb8fc]"
+              className="mt-4 inline-flex items-center gap-1 text-[13px] font-semibold text-[#5AA2FF] hover:text-[#8FBEFF]"
             >
               Read more <span aria-hidden>→</span>
             </Link>

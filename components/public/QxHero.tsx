@@ -37,7 +37,7 @@ const QxHero: React.FC = () => (
       <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
         <Link
           href="/register-login?tab=create"
-          className="rounded-lg bg-[#12b76a] px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#12b76a]/25 transition-colors hover:bg-[#0fa762]"
+          className="rounded-lg bg-[#2E7DF6] px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#2E7DF6]/25 transition-colors hover:bg-[#1E6FE0]"
         >
           Create a free account
         </Link>

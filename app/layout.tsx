@@ -48,7 +48,7 @@ export default function RootLayout({
     <html className="light">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        style={{ background: "#0B0D12" }} // ⬅️ background এখানে
+        style={{ background: "#0B1220" }}
         suppressHydrationWarning={true}
       >
         <StoreProvider>

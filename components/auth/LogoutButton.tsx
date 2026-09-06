@@ -15,9 +15,9 @@ const LogoutButton: React.FC<{ onLogout?: () => void }> = ({ onLogout }) => {
       .catch((err) => console.error("Logout failed:", err))
       .finally(() => {
         dispatch(closeUserSidebar());
-        // Hard navigation to the home page: clears RTK cache and re-runs
+        // Hard navigation to the login page: clears RTK cache and re-runs
         // middleware with the cleared auth cookie.
-        window.location.assign("/");
+        window.location.assign("/register-login?tab=signin");
       });
     setShowLogoutConfirm(false);
   };

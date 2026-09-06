@@ -43,7 +43,7 @@ const QxAboutIntro: React.FC = () => (
               <div key={year} className="flex flex-col items-center gap-2">
                 <span
                   className={`h-2.5 w-2.5 rounded-full ${
-                    i === 0 ? "bg-[#12b76a]" : "bg-white/20"
+                    i === 0 ? "bg-[#2E7DF6]" : "bg-white/20"
                   }`}
                 />
                 <span

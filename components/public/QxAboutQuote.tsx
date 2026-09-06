@@ -12,7 +12,7 @@ const QxAboutQuote: React.FC = () => (
       <div className="relative overflow-hidden rounded-3xl bg-[#1c2230] p-8 sm:p-12">
         <Quote
           size={48}
-          className="mb-5 text-[#12b76a]/40"
+          className="mb-5 text-[#2E7DF6]/40"
           strokeWidth={1.5}
         />
         <p className="max-w-3xl text-base leading-relaxed text-gray-300 sm:text-lg">
@@ -34,7 +34,7 @@ const QxAboutQuote: React.FC = () => (
             <polyline
               points="0,40 100,30 200,38 300,18 400,28 500,12 600,24 700,8 800,20 900,6"
               fill="none"
-              stroke="#4c9ffb"
+              stroke="#5AA2FF"
               strokeWidth="2"
             />
           </svg>

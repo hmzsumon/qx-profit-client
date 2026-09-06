@@ -14,6 +14,7 @@ import {
   Smartphone,
   SquareGanttChart,
   TrendingUp,
+  Trophy,
   Upload,
   Wallet,
 } from "lucide-react";
@@ -57,6 +58,12 @@ export const NAV_ITEMS: NavItem[] = [
     label: "Rank Reward",
     icon: ShieldHalf,
     href: "/rank-reward",
+  },
+  {
+    key: "profit-ranking",
+    label: "Profit Ranking",
+    icon: Trophy,
+    href: "/profit-ranking",
   },
   {
     key: "wallet",

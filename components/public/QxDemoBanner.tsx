@@ -13,7 +13,7 @@ const QxDemoBanner: React.FC = () => (
       <div className="flex flex-col items-center gap-5 rounded-2xl border border-white/[0.05] bg-[#1c2230] px-6 py-6 sm:flex-row sm:justify-between">
         {/* ── Copy ── */}
         <div className="flex items-center gap-4 text-center sm:text-left">
-          <span className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#12b76a]/10 text-[#12b76a] sm:inline-flex">
+          <span className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#2E7DF6]/10 text-[#2E7DF6] sm:inline-flex">
             <KeyRound size={22} />
           </span>
           <div>
@@ -36,7 +36,7 @@ const QxDemoBanner: React.FC = () => (
           </Link>
           <Link
             href="/register-login?tab=create"
-            className="rounded-lg bg-[#12b76a] px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#0fa762]"
+            className="rounded-lg bg-[#2E7DF6] px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#1E6FE0]"
           >
             Register an account
           </Link>

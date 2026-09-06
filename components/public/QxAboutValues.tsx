@@ -40,7 +40,7 @@ const QxAboutValues: React.FC = () => (
             key={i}
             className="rounded-2xl border border-white/[0.05] bg-[#1c2230] p-6"
           >
-            <span className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#12b76a]/12 text-[#12b76a]">
+            <span className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#2E7DF6]/12 text-[#2E7DF6]">
               <Icon size={22} />
             </span>
             <p className="text-[13px] leading-relaxed text-gray-400">{text}</p>

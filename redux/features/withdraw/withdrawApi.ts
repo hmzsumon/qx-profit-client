@@ -18,6 +18,24 @@ export const withdrawApi = apiSlice.injectEndpoints({
       providesTags: ["Withdraws"],
     }),
 
+    // withdrawal config (min / fee / processing time / on-off)
+    getWithdrawConfig: builder.query<
+      {
+        config: {
+          isActive: boolean;
+          feePercent: number;
+          minAmount: number;
+          maxAmount: number;
+          presetAmounts: number[];
+          processingTime: string;
+          requireKyc: boolean;
+        };
+      },
+      void
+    >({
+      query: () => `/withdraw-config`,
+    }),
+
     // get all agents
     getAllAgents: builder.query<any, any>({
       query: () => `/get-all-agents`,
@@ -29,4 +47,5 @@ export const {
   useCreateWithdrawRequestMutation,
   useGetMyWithdrawRequestsQuery,
   useGetAllAgentsQuery,
+  useGetWithdrawConfigQuery,
 } = withdrawApi;

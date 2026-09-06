@@ -2,6 +2,7 @@
 
 import Header from "@/components/auth/Header";
 import KycStatusBanner from "@/components/kyc/KycStatusBanner";
+import { useIdleLogout } from "@/hooks/useIdleLogout";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { DesktopSidebar, MobileSidebar } from "../sidebar";
@@ -13,6 +14,9 @@ export default function DashboardLayout({
 }) {
   // single source of truth for mobile drawer open/close
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  // 5-minute inactivity auto-logout
+  useIdleLogout();
 
   // desktop sidebar width reacts to global collapse state
   const collapsed = useSelector((s: any) => s.ui.sidebarCollapsed) as boolean;
@@ -32,7 +36,7 @@ export default function DashboardLayout({
           <DesktopSidebar />
         </aside>
 
-        <main className="min-h-[calc(100dvh-4rem)] px-4 ">
+        <main className="min-h-[calc(100dvh-4rem)] px-2 sm:px-4">
           <KycStatusBanner />
           {children}
         </main>

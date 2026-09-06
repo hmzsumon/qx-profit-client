@@ -32,7 +32,7 @@ const QxAboutDemoCta: React.FC = () => (
 
         {/* ── Monitor mock ── */}
         <div className="relative mx-auto w-full max-w-sm">
-          <div className="absolute -top-4 right-2 z-10 rounded-xl bg-[#12b76a] px-4 py-2 text-xs font-bold text-white shadow-lg">
+          <div className="absolute -top-4 right-2 z-10 rounded-xl bg-[#2E7DF6] px-4 py-2 text-xs font-bold text-white shadow-lg">
             QX Profit: while others doubt, you act!
           </div>
           <div className="rounded-xl border border-white/10 bg-[#1c2230] p-3">
@@ -41,7 +41,7 @@ const QxAboutDemoCta: React.FC = () => (
               <polyline
                 points="10,130 45,110 80,120 115,80 150,95 185,55 220,72 255,40 290,58 310,30"
                 fill="none"
-                stroke="#12b76a"
+                stroke="#2E7DF6"
                 strokeWidth="2.5"
               />
               <line

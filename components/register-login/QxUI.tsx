@@ -22,7 +22,7 @@ export const QxField: React.FC<{
   <div>
     <div
       className={`relative rounded-[4px] border bg-transparent transition-colors ${
-        error ? "border-red-500" : "border-white/20 focus-within:border-[#2e90fa]"
+        error ? "border-red-500" : "border-white/20 focus-within:border-[#2E7DF6]"
       }`}
     >
       <label className="pointer-events-none absolute -top-2 left-2.5 bg-[#252c3d] px-1.5 text-[11px] text-gray-400">
@@ -81,7 +81,7 @@ export const QxSubmit: React.FC<
   <button
     {...props}
     disabled={disabled}
-    className={`flex w-full items-center justify-center gap-2 rounded-md bg-[#2e90fa] py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#1a7ff0] disabled:cursor-not-allowed disabled:opacity-60 ${className}`}
+    className={`flex w-full items-center justify-center gap-2 rounded-md bg-[#2E7DF6] py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#1E6FE0] disabled:cursor-not-allowed disabled:opacity-60 ${className}`}
   >
     {label}
     <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/25">
@@ -130,7 +130,7 @@ export const QxCheckbox = React.forwardRef<
       ref={ref}
       type="checkbox"
       {...props}
-      className={`mt-0.5 h-4 w-4 shrink-0 rounded-[3px] border border-white/25 bg-transparent accent-[#2e90fa] ${className}`}
+      className={`mt-0.5 h-4 w-4 shrink-0 rounded-[3px] border border-white/25 bg-transparent accent-[#2E7DF6] ${className}`}
     />
     <span>{children}</span>
   </label>

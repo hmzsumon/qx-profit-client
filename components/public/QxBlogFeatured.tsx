@@ -11,7 +11,7 @@ const QxBlogFeatured: React.FC = () => (
       <article className="rounded-3xl border border-white/[0.05] bg-[#1c2230] p-7 sm:p-12">
         {/* ── Meta ── */}
         <div className="flex items-center gap-3 text-xs">
-          <span className="rounded-full bg-[#12b76a]/15 px-3 py-1 font-semibold text-[#12b76a]">
+          <span className="rounded-full bg-[#2E7DF6]/15 px-3 py-1 font-semibold text-[#2E7DF6]">
             Platform
           </span>
           <span className="text-gray-500">Featured · 8 min read</span>

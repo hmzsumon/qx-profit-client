@@ -55,7 +55,7 @@ const REVIEWS: Review[] = [
 
 /* ────────── Sub-component: 5 stars ────────── */
 const Stars: React.FC = () => (
-  <div className="mt-2 flex gap-0.5 text-[#12b76a]" aria-label="5 out of 5">
+  <div className="mt-2 flex gap-0.5 text-[#2E7DF6]" aria-label="5 out of 5">
     {Array.from({ length: 5 }).map((_, i) => (
       <span key={i} style={{ fontSize: 14 }}>
         ★
@@ -94,7 +94,7 @@ const QxTestimonials: React.FC = () => (
             </p>
             <Link
               href="/about"
-              className="mt-4 inline-flex items-center gap-1 text-[13px] font-semibold text-[#4c9ffb] hover:text-[#7bb8fc]"
+              className="mt-4 inline-flex items-center gap-1 text-[13px] font-semibold text-[#5AA2FF] hover:text-[#8FBEFF]"
             >
               Read more <span aria-hidden>→</span>
             </Link>
@@ -106,7 +106,7 @@ const QxTestimonials: React.FC = () => (
       <div className="mt-10 text-center">
         <Link
           href="/about"
-          className="inline-flex items-center justify-center rounded-lg bg-[#12b76a] px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-[#0fa762]"
+          className="inline-flex items-center justify-center rounded-lg bg-[#2E7DF6] px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-[#1E6FE0]"
         >
           View all reviews
         </Link>

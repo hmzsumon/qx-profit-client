@@ -60,7 +60,7 @@ const FEATURES: Feature[] = [
   },
   {
     Icon: Gift,
-    color: "#12b76a",
+    color: "#2E7DF6",
     title: "Bonus programs",
     desc: "Participate in tournaments and giveaways for traders to get bonuses.",
     cta: "Get a bonus",
@@ -114,7 +114,7 @@ const QxFeaturesGrid: React.FC = () => (
             {/* ── CTA ── */}
             <Link
               href={href}
-              className="mt-4 inline-flex items-center gap-1 text-[13px] font-semibold text-[#4c9ffb] hover:text-[#7bb8fc]"
+              className="mt-4 inline-flex items-center gap-1 text-[13px] font-semibold text-[#5AA2FF] hover:text-[#8FBEFF]"
             >
               {cta} <span aria-hidden>→</span>
             </Link>

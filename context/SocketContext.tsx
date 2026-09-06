@@ -16,6 +16,18 @@ interface iSocketContextType {
 
 export const SocketContext = createContext<iSocketContextType | null>(null);
 
+/* play the notify sound only if the user opted in (drawer toggle) */
+function playNotifySound() {
+  try {
+    if (localStorage.getItem("qx_notif_sound") !== "1") return;
+    const a = new Audio("/sounds/notify.wav");
+    a.volume = 0.5;
+    void a.play().catch(() => {});
+  } catch {
+    /* autoplay blocked / storage unavailable */
+  }
+}
+
 export const SocketContextProvider = ({
   children,
 }: {
@@ -82,6 +94,19 @@ export const SocketContextProvider = ({
     // Show the message immediately, without opening the bell.
     const onUserNotification = (evt: { message?: string }) => {
       if (evt?.message) toast(evt.message, { icon: "🔔" });
+      playNotifySound();
+    };
+
+    // Canonical event — cache refresh only; the paired `user-notification`
+    // event shows the toast + plays the sound (avoids doubling).
+    const onNotificationNew = () => {
+      dispatch(
+        apiSlice.util.invalidateTags([
+          "MyUnreadNotifications",
+          "MyUnreadNotificationsCount",
+          "Kyc",
+        ]),
+      );
     };
 
     // Admin created / updated an announcement -> refresh the feed for everyone.
@@ -94,6 +119,7 @@ export const SocketContextProvider = ({
     socket.on("notifications:new", onNewNotif);
     socket.on("notifications:count", onCount);
     socket.on("user-notification", onUserNotification);
+    socket.on("notification:new", onNotificationNew);
     socket.on("announcement:new", onAnnouncement);
 
     return () => {
@@ -101,6 +127,7 @@ export const SocketContextProvider = ({
       socket.off("notifications:new", onNewNotif);
       socket.off("notifications:count", onCount);
       socket.off("user-notification", onUserNotification);
+      socket.off("notification:new", onNotificationNew);
       socket.off("announcement:new", onAnnouncement);
     };
   }, [socket, dispatch]);

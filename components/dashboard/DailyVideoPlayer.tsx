@@ -45,12 +45,12 @@ export default function DailyVideoPlayer({ video }: { video: DailyVideo }) {
 
   return (
     <div>
-      <div className="mb-3">
+      <div className="mb-3 px-1">
         <h1 className="text-lg font-semibold text-white">{video.title}</h1>
         <p className="text-xs text-neutral-400">{fmtDate(video.publishDate)}</p>
       </div>
 
-      <div className="relative mx-auto w-fit max-w-full overflow-hidden rounded-2xl border border-neutral-800 bg-black">
+      <div className="relative w-full overflow-hidden rounded-2xl border border-neutral-800 bg-black">
         <video
           ref={ref}
           src={video.url}
@@ -59,7 +59,7 @@ export default function DailyVideoPlayer({ video }: { video: DailyVideo }) {
           playsInline
           muted={muted}
           preload="metadata"
-          className="block max-h-[78vh] w-auto max-w-full bg-black"
+          className="mx-auto block max-h-[82vh] w-full bg-black object-contain"
         />
 
         {needsTap && (

@@ -62,10 +62,22 @@ export const authApi = apiSlice.injectEndpoints({
       invalidatesTags: ["User"],
     }),
 
-    // login user
-    loginUser: builder.mutation<IUser, any>({
+    // login step 1: email + password -> server emails a one-time code
+    loginUser: builder.mutation<
+      { success: boolean; otpRequired: boolean; email: string; message?: string },
+      { email: string; password: string }
+    >({
       query: (body) => ({
         url: "/login",
+        method: "POST",
+        body,
+      }),
+    }),
+
+    // login step 2: verify the emailed code -> issues the session
+    loginVerifyOtp: builder.mutation<IUser, { email: string; otp: string }>({
+      query: (body) => ({
+        url: "/login/verify-otp",
         method: "POST",
         body,
       }),
@@ -78,6 +90,18 @@ export const authApi = apiSlice.injectEndpoints({
           error as any;
         }
       },
+    }),
+
+    // login step 1b: resend the login code
+    loginResendOtp: builder.mutation<
+      { success: boolean; message?: string },
+      { email: string }
+    >({
+      query: (body) => ({
+        url: "/login/resend-otp",
+        method: "POST",
+        body,
+      }),
     }),
 
     /* ────────── Load User ────────── */
@@ -476,6 +500,8 @@ export const {
   useRegisterUserMutation,
   useVerifyEmailMutation,
   useLoginUserMutation,
+  useLoginVerifyOtpMutation,
+  useLoginResendOtpMutation,
   useLogoutUserMutation,
 
   useResendVerificationEmailMutation,

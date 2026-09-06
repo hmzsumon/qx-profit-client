@@ -12,11 +12,13 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import BalanceMenu from "./BalanceMenu";
+import MobileUserMenu from "./MobileUserMenu";
 import NotificationDrawer from "./NotificationDrawer";
 import UserMenu from "./UserMenu";
 /* ────────── add: unread count hook ────────── */
 import { useGetMyUnreadNotificationsCountQuery } from "@/redux/features/notifications/notificationApi";
 import BrandLogo from "../branding/BrandLogo";
+import Avatar from "../ui/Avatar";
 
 /* ────────── Props: what Header receives ────────── */
 type Props = {
@@ -28,7 +30,8 @@ export default function Header({ open, onToggle }: Props) {
   /* ────────── Local UI state: popovers/drawers ────────── */
   const [notifOpen, setNotifOpen] = useState(false); // notification drawer
   const [balanceOpen, setBalanceOpen] = useState(false); // balance menu
-  const [userOpen, setUserOpen] = useState(false); // user menu
+  const [userOpen, setUserOpen] = useState(false); // user menu (desktop)
+  const [mobileUserOpen, setMobileUserOpen] = useState(false); // profile menu (mobile)
 
   /* ────────── Get user from global Redux store ────────── */
   const { user } = useSelector((state: any) => state.auth);
@@ -48,6 +51,7 @@ export default function Header({ open, onToggle }: Props) {
         setNotifOpen(false);
         setBalanceOpen(false);
         setUserOpen(false);
+        setMobileUserOpen(false);
       }
     };
     window.addEventListener("keydown", onKey);
@@ -57,6 +61,7 @@ export default function Header({ open, onToggle }: Props) {
   /* ────────── Refs for outside-click handling ────────── */
   const balanceRef = useRef<HTMLDivElement>(null);
   const userRef = useRef<HTMLDivElement>(null);
+  const mobileUserRef = useRef<HTMLDivElement>(null);
 
   /* ────────── Close balance/user menus on outside click ────────── */
   useEffect(() => {
@@ -67,6 +72,9 @@ export default function Header({ open, onToggle }: Props) {
       }
       if (userRef.current && !userRef.current.contains(t)) {
         setUserOpen(false);
+      }
+      if (mobileUserRef.current && !mobileUserRef.current.contains(t)) {
+        setMobileUserOpen(false);
       }
     };
     document.addEventListener("mousedown", onDocClick);
@@ -89,9 +97,9 @@ export default function Header({ open, onToggle }: Props) {
             {open ? <X size={20} /> : <Menu size={20} />}
           </button>
 
-          {/* ── Brand / logo ── */}
+          {/* ── Brand / logo → Home ── */}
           <div>
-            <BrandLogo size={28} href="/dashboard" />
+            <BrandLogo size={28} href="/" />
           </div>
         </div>
 
@@ -152,6 +160,29 @@ export default function Header({ open, onToggle }: Props) {
                 {unreadCount > 99 ? "99+" : unreadCount}
               </span>
             )}
+          </div>
+
+          {/* ── Profile menu (mobile only, right of the bell) ── */}
+          <div ref={mobileUserRef} className="relative md:hidden">
+            <button
+              onClick={() => {
+                setMobileUserOpen((v) => !v);
+                setBalanceOpen(false);
+                setNotifOpen(false);
+              }}
+              aria-haspopup="menu"
+              aria-expanded={mobileUserOpen}
+              aria-label="Open profile menu"
+              className={`rounded-full p-0.5 ${
+                mobileUserOpen ? "ring-2 ring-[#2E7DF6]/60" : ""
+              }`}
+            >
+              <Avatar src={user?.avatar} name={user?.name} size={30} />
+            </button>
+            <MobileUserMenu
+              open={mobileUserOpen}
+              onClose={() => setMobileUserOpen(false)}
+            />
           </div>
 
           {/* ── User menu (md and up) ── */}

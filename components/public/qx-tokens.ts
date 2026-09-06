@@ -3,24 +3,28 @@
    ------------------------------------------------------------------
    Single source of truth for the colours / spacing used across the
    public marketing pages (Home, FAQ, Login, Registration, footer…).
-   JS-side values live here so SVGs + inline styles stay in sync with
-   the Tailwind arbitrary classes used in the components.
-   ────────────────────────────────────────────────────────────── */
+   Palette follows the partner-program reference: deep navy surfaces
+   with a blue primary CTA. Green is reserved for positive money
+   figures only.
+   ────────────────────────────────────────────────────────── */
 
 export const QX = {
   /* ── Surfaces ── */
-  bg: "#161b27", // page background
-  bgDeep: "#10141e", // deepest layer (footer outer, hero base)
-  panel: "#1c2230", // cards / feature tiles
-  panelRaised: "#252c3d", // auth card, hovered tiles, footer panel
+  bg: "#0B1220", // page background
+  bgDeep: "#070C15", // deepest layer (footer outer, hero base)
+  panel: "#111C30", // cards / feature tiles
+  panelRaised: "#16233B", // auth card, hovered tiles, footer panel
   line: "rgba(255,255,255,0.06)", // hairline borders
 
   /* ── Brand accents ── */
-  green: "#12b76a", // primary CTA (Sign up / Create account)
+  blue: "#2E7DF6", // primary CTA (Try now / Sign up / Register)
+  blueHover: "#1E6FE0",
+  glow: "#3B82F6", // glows / decorative blue
+  link: "#5AA2FF", // inline text links ("Read more →")
+
+  /* ── Positive money figures only ── */
+  green: "#12b76a",
   greenHover: "#0fa762",
-  blue: "#2e90fa", // auth submit (Sign in / Registration)
-  blueHover: "#1a7ff0",
-  link: "#4c9ffb", // inline text links ("Read more →")
 
   /* ── Text ── */
   text: "#ffffff",
@@ -38,8 +42,8 @@ export const QX_CX = {
   heading:
     "text-2xl sm:text-[32px] font-extrabold tracking-tight text-white leading-tight",
   subheading: "mt-3 text-sm text-[#8b93a7]",
-  btnGreen:
-    "inline-flex items-center justify-center rounded-lg bg-[#12b76a] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#0fa762]",
+  btnPrimary:
+    "inline-flex items-center justify-center rounded-lg bg-[#2E7DF6] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#1E6FE0]",
   btnGhost:
     "inline-flex items-center justify-center rounded-lg border border-white/15 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/5",
 } as const;

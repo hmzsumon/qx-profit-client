@@ -37,7 +37,7 @@ export default function AuthPage(): JSX.Element {
 
   /* ────────── Render ────────── */
   return (
-    <section className="mx-auto max-w-xl px-4 py-14 sm:py-20">
+    <section className="mx-auto max-w-xl px-2 py-14 sm:px-4 sm:py-20">
       {/* ── Heading ── */}
       <h1 className="mb-8 text-center text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
         {tab === "signin" ? "Sign In To Your Account" : "Sign Up"}
@@ -51,7 +51,7 @@ export default function AuthPage(): JSX.Element {
         </div>
 
         {/* Form */}
-        <div className="px-6 py-8 sm:px-10">
+        <div className="px-4 py-8 sm:px-10">
           {tab === "signin" ? (
             <QxSignInForm />
           ) : (

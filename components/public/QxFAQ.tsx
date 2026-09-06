@@ -56,16 +56,16 @@ const QxFAQ: React.FC = () => (
       <div className="mt-10 flex items-center justify-between gap-4 rounded-2xl bg-[#1c2230] px-5 py-4">
         <p className="text-[13px] text-gray-300">
           Do you have some questions? Go to all questions in the{" "}
-          <Link href="/faq" className="font-semibold text-[#4c9ffb]">
+          <Link href="/faq" className="font-semibold text-[#5AA2FF]">
             FAQ section
           </Link>{" "}
           or{" "}
-          <Link href="/faq" className="font-semibold text-[#4c9ffb]">
+          <Link href="/faq" className="font-semibold text-[#5AA2FF]">
             contact us
           </Link>
           .
         </p>
-        <Armchair size={40} className="hidden shrink-0 text-[#12b76a] sm:block" />
+        <Armchair size={40} className="hidden shrink-0 text-[#2E7DF6] sm:block" />
       </div>
     </div>
   </section>

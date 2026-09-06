@@ -20,7 +20,7 @@ export default function SidebarUserBlock() {
     } catch (err) {
       toast.error(getErrorMessage(err));
     } finally {
-      window.location.assign("/");
+      window.location.assign("/register-login?tab=signin");
     }
   };
 

@@ -40,7 +40,7 @@ const QxAboutSteps: React.FC = () => (
       <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {STEPS.map(({ Icon, verb, rest }, i) => (
           <div key={i} className="flex flex-col gap-3">
-            <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#1c2230] text-[#12b76a]">
+            <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#1c2230] text-[#2E7DF6]">
               <Icon size={22} />
             </span>
             <p className="text-sm text-gray-400">

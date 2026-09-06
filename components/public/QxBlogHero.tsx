@@ -33,7 +33,7 @@ const QxBlogHero: React.FC = () => (
             key={c}
             className={`rounded-full px-4 py-1.5 text-[13px] font-medium ${
               i === 0
-                ? "bg-[#12b76a] text-white"
+                ? "bg-[#2E7DF6] text-white"
                 : "bg-[#1c2230] text-gray-400"
             }`}
           >

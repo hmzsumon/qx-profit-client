@@ -13,7 +13,7 @@ type QxComingSoonProps = {
 
 const QxComingSoon: React.FC<QxComingSoonProps> = ({ title, note }) => (
   <div className="mx-auto flex min-h-[60vh] max-w-6xl flex-col items-center justify-center px-4 py-20 text-center sm:px-6 lg:px-8">
-    <span className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#12b76a]/10 text-2xl text-[#12b76a]">
+    <span className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#2E7DF6]/10 text-2xl text-[#2E7DF6]">
       ●
     </span>
     <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">

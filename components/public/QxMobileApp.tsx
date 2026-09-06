@@ -35,7 +35,7 @@ const QxMobileApp: React.FC = () => (
         {/* ── Left: rating badge + phone ── */}
         <div className="relative shrink-0">
           {/* Rating badge */}
-          <div className="absolute -left-2 top-4 z-10 flex flex-col items-center rounded-2xl bg-[#2e90fa] px-3 py-2 leading-none text-white shadow-lg shadow-[#2e90fa]/30">
+          <div className="absolute -left-2 top-4 z-10 flex flex-col items-center rounded-2xl bg-[#2E7DF6] px-3 py-2 leading-none text-white shadow-lg shadow-[#2E7DF6]/30">
             <span className="text-2xl font-black">4,8</span>
             <span className="mt-1 text-[10px]">★★★★★</span>
           </div>

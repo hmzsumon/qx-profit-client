@@ -2,7 +2,7 @@
    Country · Currency · Email · Password · Promo code, plus the two
    confirmation checkboxes, then the blue "Registration →" button.
 
-   The visible fields mirror the Quotex sign-up form. On submit we
+   The visible fields mirror the reference sign-up form. On submit we
    map them onto the existing /register payload (name is derived
    from the email, promo code is passed through as the partner code)
    so the current backend keeps working.
@@ -12,7 +12,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -34,6 +34,8 @@ const FIXED_CURRENCY = "USDT";
 
 const QxRegisterForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const seededEmail = (searchParams.get("email") ?? "").trim().toLowerCase();
   const [registerUser, { isLoading }] = useRegisterUserMutation();
 
   const {
@@ -47,7 +49,7 @@ const QxRegisterForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => 
     defaultValues: {
       country: "",
       currency: FIXED_CURRENCY,
-      email: "",
+      email: seededEmail,
       password: "",
       confirmPassword: "",
       promoCode: "",
@@ -145,7 +147,7 @@ const QxRegisterForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => 
       <div className="space-y-3.5 pt-1">
         <QxCheckbox {...register("ageAndAgreement")}>
           I confirm that I am 18 years old or older and accept{" "}
-          <Link href="#" className="text-[#4c9ffb]">
+          <Link href="#" className="text-[#5AA2FF]">
             Service Agreement
           </Link>
         </QxCheckbox>

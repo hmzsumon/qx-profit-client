@@ -3,7 +3,11 @@
 "use client";
 
 import SecurityVerifyDrawer from "@/components/security/SecurityVerifyDrawer";
-import { useCreateWithdrawRequestMutation } from "@/redux/features/withdraw/withdrawApi";
+import { useGetMyKycQuery } from "@/redux/features/auth/authApi";
+import {
+  useCreateWithdrawRequestMutation,
+  useGetWithdrawConfigQuery,
+} from "@/redux/features/withdraw/withdrawApi";
 import { fetchBaseQueryError } from "@/redux/services/helpers";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -13,27 +17,31 @@ import {
   FiAlertCircle,
   FiArrowLeft,
   FiArrowRight,
-  FiCheck,
   FiClock,
   FiInfo,
 } from "react-icons/fi";
 import { useSelector } from "react-redux";
 
-const REQUIRED_MEMBERS = 3;
-
 export default function WithdrawPage() {
   const { user } = useSelector((state: any) => state.auth);
-
-  const activatedMembers = user?.addNewMember ?? 0;
-
-  const isWithdrawBlocked =
-    user?.agentName === "Default Agent" && (user?.addNewMember ?? 0) < 3;
-
-  const remainingToActivate = Math.max(0, REQUIRED_MEMBERS - activatedMembers);
 
   // Create request
   const [createWithdrawRequest, { isLoading: isCreateLoading }] =
     useCreateWithdrawRequestMutation();
+
+  // Admin-configured withdrawal rules
+  const { data: cfgRes } = useGetWithdrawConfigQuery();
+  const cfg = cfgRes?.config;
+  const feePercent = cfg?.feePercent ?? 0;
+  const maxWithdraw = cfg?.maxAmount ?? 0; // 0 = unlimited
+  const processingTime = cfg?.processingTime ?? "1 minute – 48 hours";
+  const withdrawDisabled = cfg ? !cfg.isActive : false;
+
+  // KYC gate
+  const { data: kycRes } = useGetMyKycQuery();
+  const kycStatus: string =
+    kycRes?.kyc?.status ?? kycRes?.data?.status ?? kycRes?.status ?? "draft";
+  const needsKyc = (cfg?.requireKyc ?? true) && kycStatus !== "approved";
 
   // Local form state
   const [amount, setAmount] = useState<string>("");
@@ -48,18 +56,22 @@ export default function WithdrawPage() {
   const [verifyOpen, setVerifyOpen] = useState(false);
 
   // Derived
-  const minWithdraw = 20;
-  const feeRate = 0.08;
+  const minWithdraw = cfg?.minAmount ?? 10;
+  const feeRate = feePercent / 100;
   const availableBalance = useMemo(
     () => Math.max(0, user?.m_balance || 0),
     [user?.m_balance],
   );
 
-  // balance < 200 হলে ইনপুট থেকে টাইপ নিষিদ্ধ
-  const canTypeCustomAmount = availableBalance >= 200;
-
-  // preset amounts
-  const presetAmounts = [20, 30, 50, 100, 200];
+  // admin-configured quick-pick chips (a shortcut — the field is always typeable too)
+  const presetAmounts = useMemo(
+    () =>
+      cfg?.presetAmounts?.length
+        ? [...cfg.presetAmounts].sort((a, b) => a - b)
+        : [20, 30, 50, 100, 200],
+    [cfg?.presetAmounts],
+  );
+  const topPreset = presetAmounts[presetAmounts.length - 1] ?? 200;
 
   const withdrawFee = useMemo(() => {
     const n = parseFloat(amount || "0");
@@ -81,6 +93,8 @@ export default function WithdrawPage() {
       return setAmountError("Enter a valid amount");
     if (parsed < minWithdraw)
       return setAmountError(`Minimum withdrawal amount is ${minWithdraw} USDT`);
+    if (maxWithdraw > 0 && parsed > maxWithdraw)
+      return setAmountError(`Maximum withdrawal amount is ${maxWithdraw} USDT`);
     if (parsed > availableBalance)
       return setAmountError("Amount exceeds available balance");
 
@@ -117,6 +131,14 @@ export default function WithdrawPage() {
     }
     if (user?.is_withdraw_block) {
       toast.error("Please contact customer support");
+      return;
+    }
+    if (withdrawDisabled) {
+      toast.error("Withdrawals are currently disabled");
+      return;
+    }
+    if (needsKyc) {
+      toast.error("Complete KYC verification to withdraw");
       return;
     }
 
@@ -187,7 +209,7 @@ export default function WithdrawPage() {
               </span>
 
               <span className="inline-flex items-center justify-center gap-2 rounded-full border border-emerald-700/30 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-100 sm:text-[13px]">
-                Fee: <strong className="text-white/95">8%</strong>
+                Fee: <strong className="text-white/95">{feePercent}%</strong>
               </span>
 
               <span className="col-span-2 inline-flex items-center justify-between gap-2 rounded-full border border-emerald-700/30 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-100 sm:col-span-1 sm:justify-center sm:text-[13px]">
@@ -234,7 +256,7 @@ export default function WithdrawPage() {
                               : "border-neutral-700 bg-neutral-900/70 text-neutral-200 hover:border-neutral-500",
                         ].join(" ")}
                       >
-                        {preset === 200 ? "200+" : preset}
+                        {preset === topPreset ? `${preset}+` : preset}
                       </button>
                     );
                   })}
@@ -248,22 +270,9 @@ export default function WithdrawPage() {
                     type="number"
                     inputMode="decimal"
                     value={amount}
-                    readOnly={!canTypeCustomAmount}
-                    onChange={(e) => {
-                      // balance < 200 হলে টাইপ allow করবে না
-                      if (!canTypeCustomAmount) return;
-                      handleAmountChange(e.target.value);
-                    }}
-                    placeholder={
-                      canTypeCustomAmount
-                        ? `${minWithdraw} or more`
-                        : "Select 20, 30, 50 or 100"
-                    }
-                    className={`w-full rounded-lg border border-neutral-800 bg-neutral-900/70 px-9 py-2.5 text-sm text-neutral-100 outline-none placeholder:text-neutral-500 focus:ring-2 focus:ring-emerald-600/40 ${
-                      !canTypeCustomAmount
-                        ? "cursor-not-allowed bg-neutral-900/80"
-                        : ""
-                    }`}
+                    onChange={(e) => handleAmountChange(e.target.value)}
+                    placeholder={`Enter amount — min ${minWithdraw}, or pick above`}
+                    className="w-full rounded-lg border border-neutral-800 bg-neutral-900/70 px-9 py-2.5 text-sm text-neutral-100 outline-none placeholder:text-neutral-500 focus:ring-2 focus:ring-emerald-600/40"
                     step="0.01"
                     min={minWithdraw}
                   />
@@ -272,7 +281,7 @@ export default function WithdrawPage() {
                 {amount && !amountError && (
                   <div className="mt-2 grid grid-cols-2 gap-2 text-xs text-neutral-300 md:grid-cols-3">
                     <div className="rounded-lg border border-neutral-800 bg-neutral-900/50 px-3 py-1.5">
-                      Fee (5%):{" "}
+                      Fee ({feePercent}%):{" "}
                       <span className="font-semibold text-emerald-300">
                         ${withdrawFee}
                       </span>
@@ -398,15 +407,36 @@ export default function WithdrawPage() {
                   user?.is_withdraw_block ||
                   !availableBalance ||
                   isCreateLoading ||
-                  isWithdrawBlocked
+                  withdrawDisabled ||
+                  needsKyc
                 }
                 className="w-full rounded-xl bg-emerald-500 px-4 py-3 text-sm font-semibold text-neutral-950 transition hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {isCreateLoading ? "Processing…" : "Request withdrawal"}
               </button>
 
-              {/* block withdraw message */}
-              {isWithdrawBlocked && (
+              {/* withdrawals turned off by admin */}
+              {withdrawDisabled && (
+                <div className="mt-3 rounded-2xl border border-neutral-700 bg-neutral-800/40 p-4">
+                  <div className="flex items-start gap-3">
+                    <div className="rounded-full bg-neutral-700/50 p-2 text-neutral-300">
+                      <FiAlertCircle className="text-base" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm font-semibold text-neutral-100">
+                        Withdrawals are currently disabled
+                      </p>
+                      <p className="mt-1 text-xs leading-relaxed text-neutral-400">
+                        The withdrawal service is temporarily paused. Please
+                        check back later.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* KYC required */}
+              {!withdrawDisabled && needsKyc && (
                 <div className="mt-3 rounded-2xl border border-amber-500/30 bg-gradient-to-br from-amber-500/10 to-red-500/10 p-4 shadow-sm backdrop-blur-sm">
                   <div className="flex items-start gap-3">
                     <div className="rounded-full bg-amber-500/15 p-2 text-amber-300">
@@ -415,26 +445,30 @@ export default function WithdrawPage() {
 
                     <div className="flex-1">
                       <p className="text-sm font-semibold text-amber-100">
-                        Withdrawals are temporarily unavailable
+                        {kycStatus === "pending"
+                          ? "Your KYC is under review"
+                          : "KYC verification required"}
                       </p>
 
                       <p className="mt-1 text-xs leading-relaxed text-amber-200/90">
-                        To unlock withdrawal access, please complete your{" "}
-                        <span className="font-semibold text-white">
-                          KYC verification
-                        </span>
-                        .
+                        {kycStatus === "pending"
+                          ? "Withdrawals unlock as soon as your identity check is approved."
+                          : "To unlock withdrawal access, please complete your identity verification."}
                       </p>
 
-                      <div className="mt-3">
-                        <Link
-                          href="/settings/profile"
-                          className="inline-flex items-center gap-2 rounded-xl bg-white/10 px-3 py-2 text-xs font-medium text-white transition hover:bg-white/20"
-                        >
-                          Complete KYC Now
-                          <FiArrowRight className="text-sm" />
-                        </Link>
-                      </div>
+                      {kycStatus !== "pending" && (
+                        <div className="mt-3">
+                          <Link
+                            href="/kyc"
+                            className="inline-flex items-center gap-2 rounded-xl bg-white/10 px-3 py-2 text-xs font-medium text-white transition hover:bg-white/20"
+                          >
+                            {kycStatus === "rejected"
+                              ? "Resubmit KYC"
+                              : "Complete KYC Now"}
+                            <FiArrowRight className="text-sm" />
+                          </Link>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -477,10 +511,12 @@ export default function WithdrawPage() {
                   </span>
                   <div>
                     <div className="font-medium text-neutral-200">
-                      Network fees
+                      {feePercent > 0 ? "Network fees" : "No fees"}
                     </div>
                     <div className="text-neutral-400">
-                      8% flat fee applies to all {network} transactions.
+                      {feePercent > 0
+                        ? `${feePercent}% flat fee applies to all withdrawals.`
+                        : "No withdrawal fee is charged."}
                     </div>
                   </div>
                 </div>
@@ -494,23 +530,7 @@ export default function WithdrawPage() {
                       Processing time
                     </div>
                     <div className="text-neutral-400">
-                      Typically completes within 1M–24 hours (depends on
-                      network).
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <span className="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full border border-emerald-700/40 bg-emerald-500/10 text-xs font-bold text-emerald-300">
-                    <FiCheck />
-                  </span>
-                  <div>
-                    <div className="font-medium text-neutral-200">
-                      Address verification
-                    </div>
-                    <div className="text-neutral-400">
-                      Ensure your {network} address is correct. Transactions
-                      cannot be reversed.
+                      Typically completes within {processingTime}.
                     </div>
                   </div>
                 </div>

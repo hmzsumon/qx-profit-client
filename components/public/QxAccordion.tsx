@@ -52,7 +52,7 @@ const QxAccordion: React.FC<QxAccordionProps> = ({
               <span className="text-sm font-medium text-white">{item.q}</span>
               <Plus
                 size={18}
-                className={`shrink-0 text-[#4c9ffb] transition-transform duration-200 ${
+                className={`shrink-0 text-[#5AA2FF] transition-transform duration-200 ${
                   isOpen ? "rotate-45" : ""
                 }`}
               />

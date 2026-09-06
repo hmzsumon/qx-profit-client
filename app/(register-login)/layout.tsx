@@ -13,7 +13,7 @@ const RegisterLoginLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div className="min-h-screen bg-[#161b27] text-white">
+    <div className="min-h-screen bg-[#0B1220] text-white">
       {/* ── Navbar (fixed, h-16) ── */}
       <QxNavbar />
 
@@ -29,7 +29,7 @@ const RegisterLoginLayout = ({
           <polyline
             points="0,180 120,150 240,170 360,110 480,140 600,80 720,120 840,60 960,100 1080,50 1200,90 1320,40 1440,70"
             fill="none"
-            stroke="#4c9ffb"
+            stroke="#5AA2FF"
             strokeWidth="3"
           />
         </svg>

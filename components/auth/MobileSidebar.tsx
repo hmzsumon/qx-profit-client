@@ -28,7 +28,7 @@ export default function MobileSidebar({ open, onClose }: Props) {
     } catch (err) {
       toast.error(getErrorMessage(err));
     } finally {
-      window.location.assign("/");
+      window.location.assign("/register-login?tab=signin");
     }
   };
 

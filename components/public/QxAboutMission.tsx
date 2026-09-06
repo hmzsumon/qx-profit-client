@@ -13,7 +13,7 @@ const QxAboutMission: React.FC = () => (
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center">
         {/* ── Screenshot + assets badge ── */}
         <div className="relative">
-          <div className="absolute -left-3 -top-3 z-10 flex h-20 w-20 flex-col items-center justify-center rounded-full bg-[#2e90fa] text-white shadow-lg shadow-[#2e90fa]/30">
+          <div className="absolute -left-3 -top-3 z-10 flex h-20 w-20 flex-col items-center justify-center rounded-full bg-[#2E7DF6] text-white shadow-lg shadow-[#2E7DF6]/30">
             <span className="text-lg font-black leading-none">300+</span>
             <span className="text-[10px] leading-none">assets</span>
           </div>

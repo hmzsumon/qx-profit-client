@@ -6,7 +6,8 @@ import {
   useGetMyUnreadNotificationsQuery,
   useUpdateNotificationMutation,
 } from "@/redux/features/notifications/notificationApi";
-import { X } from "lucide-react";
+import { Bell, BellOff, X } from "lucide-react";
+import { useEffect, useState } from "react";
 
 /* ──────────  Notification drawer panel  ────────── */
 export default function NotificationDrawer({
@@ -27,6 +28,27 @@ export default function NotificationDrawer({
 
   const notifications = data?.notifications ?? [];
   const unreadCount = countData?.dataCount ?? 0;
+
+  const [soundOn, setSoundOn] = useState(false);
+  useEffect(() => {
+    try {
+      setSoundOn(localStorage.getItem("qx_notif_sound") === "1");
+    } catch {}
+  }, []);
+  const toggleSound = () => {
+    const next = !soundOn;
+    setSoundOn(next);
+    try {
+      localStorage.setItem("qx_notif_sound", next ? "1" : "0");
+    } catch {}
+    if (next) {
+      try {
+        const a = new Audio("/sounds/notify.wav");
+        a.volume = 0.5;
+        void a.play().catch(() => {});
+      } catch {}
+    }
+  };
 
   return (
     <>
@@ -56,12 +78,21 @@ export default function NotificationDrawer({
               </span>
             ) : null}
           </div>
-          <button
-            onClick={onClose}
-            className="rounded-lg p-2 text-neutral-300 hover:bg-neutral-900 hover:text-white"
-          >
-            <X size={18} />
-          </button>
+          <div className="flex items-center gap-1">
+            <button
+              onClick={toggleSound}
+              title={soundOn ? "Sound on" : "Sound off"}
+              className="rounded-lg p-2 text-neutral-300 hover:bg-neutral-900 hover:text-white"
+            >
+              {soundOn ? <Bell size={16} /> : <BellOff size={16} />}
+            </button>
+            <button
+              onClick={onClose}
+              className="rounded-lg p-2 text-neutral-300 hover:bg-neutral-900 hover:text-white"
+            >
+              <X size={18} />
+            </button>
+          </div>
         </div>
 
         {/* ──────────  list  ────────── */}

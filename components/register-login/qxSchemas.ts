@@ -1,5 +1,5 @@
 /* ────────── QX PROFIT — Auth form schemas ──────────
-   Zod schemas for the Quotex-style Login / Registration forms.
+   Zod schemas for the QX Profit Login / Registration forms.
    ─────────────────────────────────────────────────── */
 
 import { z } from "zod";

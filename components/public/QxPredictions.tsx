@@ -39,7 +39,7 @@ const QxPredictions: React.FC = () => (
             <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
               <Link
                 href="/register-login?tab=create"
-                className="rounded-lg bg-[#12b76a] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#0fa762]"
+                className="rounded-lg bg-[#2E7DF6] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#1E6FE0]"
               >
                 Try it for free
               </Link>
@@ -57,10 +57,10 @@ const QxPredictions: React.FC = () => (
               <polyline
                 points="0,70 32,58 64,64 96,40 128,48 160,28 192,34 224,16 256,24 288,10 320,6"
                 fill="none"
-                stroke="#2e90fa"
+                stroke="#2E7DF6"
                 strokeWidth="2.5"
               />
-              <circle cx="288" cy="10" r="4" fill="#2e90fa" />
+              <circle cx="288" cy="10" r="4" fill="#2E7DF6" />
             </svg>
           </div>
 
@@ -71,7 +71,7 @@ const QxPredictions: React.FC = () => (
                 key={label}
                 className="flex flex-col gap-4 rounded-2xl bg-white p-5 shadow-sm"
               >
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#12b76a] text-white">
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#2E7DF6] text-white">
                   <Icon size={20} />
                 </span>
                 <p className="text-sm font-semibold text-gray-800">
