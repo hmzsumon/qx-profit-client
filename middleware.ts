@@ -51,6 +51,25 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  /* ────────── Installed Android app (TWA) opens straight to the app ──────────
+     A Trusted Web Activity sends `X-Requested-With: <android-package>` on its
+     navigations. A normal browser never does. So when the APK opens the site
+     root, skip the marketing home: logged in -> dashboard, otherwise -> sign in.
+     Regular web browsers keep landing on "/". */
+  const requestedWith = request.headers.get("x-requested-with") || "";
+  const isAndroidApp = requestedWith.startsWith("com.qxprofit");
+  if (isAndroidApp && pathname === "/") {
+    const url = request.nextUrl.clone();
+    url.search = "";
+    if (token) {
+      url.pathname = "/dashboard";
+    } else {
+      url.pathname = "/register-login";
+      url.searchParams.set("tab", "signin");
+    }
+    return NextResponse.redirect(url, 302);
+  }
+
   const isPublicRoute = PUBLIC_ROUTES.includes(pathname);
 
   // No token on a private route -> send to the sign-in page.

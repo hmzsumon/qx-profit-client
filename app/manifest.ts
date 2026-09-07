@@ -5,7 +5,9 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "QX Profit",
     short_name: "QX Profit",
     description: "QX Profit trading platform",
-    start_url: "/",
+    // installed app opens on the sign-in screen; the site root stays the
+    // marketing home for regular browsers
+    start_url: "/register-login?tab=signin",
     scope: "/",
     display: "standalone",
     orientation: "portrait",

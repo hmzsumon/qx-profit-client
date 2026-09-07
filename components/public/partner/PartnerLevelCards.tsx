@@ -9,9 +9,7 @@ const LEVELS = [
   { n: 2, name: "Advanced", deposits: "15–49", share: "3%" },
   { n: 3, name: "Professional", deposits: "50–99", share: "4%" },
   { n: 4, name: "Expert", deposits: "100–199", share: "4.5%" },
-  { n: 5, name: "Master", deposits: "200–499", share: "5%" },
-  { n: 6, name: "Guru", deposits: "500–699", share: "5.5%" },
-  { n: 7, name: "Legend", deposits: "700+", share: "6%" },
+  { n: 5, name: "Master", deposits: "200+", share: "5%" },
 ];
 
 export default function PartnerLevelCards() {
@@ -39,7 +37,7 @@ export default function PartnerLevelCards() {
           turnover share and open extra partner benefits.
         </p>
 
-        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
           {LEVELS.map((l) => (
             <article
               key={l.n}
