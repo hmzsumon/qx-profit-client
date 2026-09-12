@@ -2,6 +2,7 @@
 "use client";
 
 import Avatar from "@/components/ui/avatar";
+import { iso2ForCountry } from "@/lib/countryFlag";
 import type { ProfitRankRow } from "@/redux/features/leaderboard/leaderboardApi";
 
 const usd = (v: number) =>
@@ -15,10 +16,11 @@ const MEDAL: Record<number, string> = {
 
 export default function RankRow({ row }: { row: ProfitRankRow }) {
   const medal = MEDAL[row.rank];
+  const iso2 = iso2ForCountry(row.country);
 
   return (
     <div
-      className={`flex items-center gap-3 rounded-xl border px-3 py-2.5 ${
+      className={`flex items-center gap-2.5 rounded-xl border px-3 py-2.5 sm:gap-3 ${
         row.isMe
           ? "border-[#2E7DF6]/60 bg-[#2E7DF6]/10"
           : "border-white/10 bg-white/[0.03]"
@@ -35,10 +37,11 @@ export default function RankRow({ row }: { row: ProfitRankRow }) {
       <Avatar src={row.avatar} name={row.name} size={36} />
 
       <div className="min-w-0 flex-1">
-        <p className="truncate text-sm font-semibold text-white">
-          {row.name}
+        <p className="flex items-center gap-1.5 truncate text-sm font-semibold text-white">
+          <span className="truncate">{row.name}</span>
+          {iso2 && <span className={`fi fi-${iso2} shrink-0 rounded-[2px]`} title={row.country} />}
           {row.isMe && (
-            <span className="ml-2 rounded-full bg-[#2E7DF6]/20 px-2 py-0.5 text-[10px] font-medium text-[#5AA2FF]">
+            <span className="shrink-0 rounded-full bg-[#2E7DF6]/20 px-2 py-0.5 text-[10px] font-medium text-[#5AA2FF]">
               You
             </span>
           )}

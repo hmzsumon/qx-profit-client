@@ -2,6 +2,7 @@ import SocketProvider from "@/providers/SocketProvider";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Toaster } from "react-hot-toast";
+import "flag-icons/css/flag-icons.min.css";
 import "./globals.css";
 
 import StoreProvider from "./StoreProvider";

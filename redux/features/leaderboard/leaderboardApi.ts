@@ -5,6 +5,7 @@ export type ProfitRankRow = {
   rank: number;
   name: string;
   avatar: string;
+  country: string;
   profit: number;
   isMe: boolean;
 };

@@ -47,6 +47,7 @@
 		"clsx": "^2.1.1",
 		"createjs-module": "^0.8.3",
 		"date-fns": "^4.1.0",
+		"flag-icons": "^7.5.0",
 		"flowbite-react": "^0.10.2",
 		"framer-motion": "^12.23.12",
 		"html-react-parser": "^5.2.2",
