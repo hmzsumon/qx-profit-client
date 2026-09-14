@@ -62,9 +62,10 @@ export const authApi = apiSlice.injectEndpoints({
       invalidatesTags: ["User"],
     }),
 
-    // login step 1: email + password -> server emails a one-time code
+    // Login step 1 returns a session for admin-verified emails, otherwise an OTP challenge.
     loginUser: builder.mutation<
-      { success: boolean; otpRequired: boolean; email: string; message?: string },
+      { success: boolean; otpRequired: true; email: string; message?: string }
+        | (IUser & { otpRequired?: false }),
       { email: string; password: string }
     >({
       query: (body) => ({
@@ -72,6 +73,15 @@ export const authApi = apiSlice.injectEndpoints({
         method: "POST",
         body,
       }),
+      invalidatesTags: (result) => result && !result.otpRequired ? ["User"] : [],
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          if (!data.otpRequired) dispatch(setUser(data));
+        } catch {
+          // The sign-in form displays login failures.
+        }
+      },
     }),
 
     // login step 2: verify the emailed code -> issues the session

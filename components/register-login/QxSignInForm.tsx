@@ -1,13 +1,13 @@
 /* ────────── QX PROFIT — Sign in form ──────────
-   Step 1: email + password. On success the server emails a one-time
-   code and we switch to the OTP step (QxLoginOtp) without navigating.
+   Step 1: email + password. Admin-verified users sign in directly;
+   other users continue to the emailed OTP step (QxLoginOtp).
    ───────────────────────────────────────────── */
 
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -26,6 +26,7 @@ import { qxSignInSchema, type QxSignInValues } from "./qxSchemas";
 
 const QxSignInForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [login, { isLoading }] = useLoginUserMutation();
   const [otpEmail, setOtpEmail] = useState<string | null>(null);
 
@@ -49,6 +50,11 @@ const QxSignInForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => {
       if (res?.otpRequired) {
         toast.success("We emailed you a login code");
         setOtpEmail(res.email || email);
+        onSuccess?.();
+      } else if (res?.success) {
+        toast.success("Signed in");
+        const next = searchParams.get("next") || "/dashboard";
+        router.push(next.startsWith("/") && !next.startsWith("//") ? next : "/dashboard");
         onSuccess?.();
       }
     } catch (e: any) {
