@@ -46,7 +46,7 @@ export default function RankRow({ row }: { row: ProfitRankRow }) {
             </span>
           )}
         </p>
-        <p className="text-[11px] text-white/50">QX Investment profit</p>
+        <p className="text-[11px] text-white/50">Today&apos;s QX Investment profit</p>
       </div>
 
       <span className="shrink-0 text-sm font-bold text-[#12b76a]">

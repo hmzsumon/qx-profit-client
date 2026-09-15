@@ -166,7 +166,7 @@ export default function DashboardHome() {
         {/* stat chips */}
         <section className="grid grid-cols-3 gap-2">
           <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
-            <p className="text-[11px] text-white/50">QX Invest. profit</p>
+            <p className="text-[11px] text-white/50">Today&apos;s QX profit</p>
             <p className="mt-1 text-sm font-bold text-[#12b76a]">
               {usd(myProfit)}
             </p>
