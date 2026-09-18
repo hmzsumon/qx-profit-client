@@ -1,14 +1,10 @@
 /* ────────── Profit ranking — list ────────── */
 "use client";
 
-import type { ProfitRankRow } from "@/redux/features/leaderboard/leaderboardApi";
+import type { ProfitLeaderboard } from "@/redux/features/leaderboard/leaderboardApi";
 import RankRow from "./RankRow";
 
-export default function ProfitRankingList({
-  data,
-}: {
-  data: { top: ProfitRankRow[]; me: { rank: number; profit: number } | null };
-}) {
+export default function ProfitRankingList({ data }: { data: ProfitLeaderboard }) {
   return (
     <div className="space-y-5">
       <div className="space-y-2">
@@ -20,17 +16,18 @@ export default function ProfitRankingList({
       {data.me && !data.top.some((r) => r.isMe) && (
         <div className="space-y-2 border-t border-white/10 pt-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-white/50">
-            Your position
+            Your ranking
           </p>
           <RankRow
             row={{
-              rank: data.me.rank,
+              rank: data.me.rank ?? 0,
               name: "You",
               avatar: "",
               country: "",
-              profit: data.me.profit,
+              investment: data.me.investment,
               isMe: true,
             }}
+            rankLabel={data.me.rank == null ? "20+" : undefined}
           />
         </div>
       )}

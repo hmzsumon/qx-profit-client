@@ -18,7 +18,7 @@ export default function ProfitRankingPage() {
           <div>
             <h1 className="text-xl font-bold tracking-tight">Profit Ranking</h1>
             <p className="text-xs text-white/50">
-              Top 20 partners by today&apos;s QX Investment profit
+              Top 20 partners by total QX Investment amount
             </p>
           </div>
         </header>
@@ -48,7 +48,7 @@ export default function ProfitRankingPage() {
         {!isLoading && !isError && (!data || data.top.length === 0) && (
           <EmptyState
             title="No ranking yet"
-            subtitle="Once partners start earning QX Investment profit today, the top 20 will appear here."
+            subtitle="Once partners start investing in QX Investment, the top 20 will appear here."
             actionLabel="Go to Dashboard"
             onAction={() => (window.location.href = "/dashboard")}
           />

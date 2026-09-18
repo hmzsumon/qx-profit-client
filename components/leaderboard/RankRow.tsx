@@ -14,7 +14,14 @@ const MEDAL: Record<number, string> = {
   3: "bg-[#E0995B] text-[#3a1e00]",
 };
 
-export default function RankRow({ row }: { row: ProfitRankRow }) {
+export default function RankRow({
+  row,
+  rankLabel,
+}: {
+  row: ProfitRankRow;
+  /** Overrides the badge text, e.g. "20+" for a standing beyond the top 20. */
+  rankLabel?: string;
+}) {
   const medal = MEDAL[row.rank];
   const iso2 = iso2ForCountry(row.country);
 
@@ -27,11 +34,11 @@ export default function RankRow({ row }: { row: ProfitRankRow }) {
       }`}
     >
       <span
-        className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
+        className={`flex h-7 min-w-[1.75rem] shrink-0 items-center justify-center rounded-full px-1.5 text-[11px] font-bold ${
           medal || "bg-white/10 text-white/70"
         }`}
       >
-        {row.rank}
+        {rankLabel ?? row.rank}
       </span>
 
       <Avatar src={row.avatar} name={row.name} size={36} />
@@ -46,11 +53,11 @@ export default function RankRow({ row }: { row: ProfitRankRow }) {
             </span>
           )}
         </p>
-        <p className="text-[11px] text-white/50">Today&apos;s QX Investment profit</p>
+        <p className="text-[11px] text-white/50">Total QX Investment</p>
       </div>
 
       <span className="shrink-0 text-sm font-bold text-[#12b76a]">
-        {usd(row.profit)}
+        {usd(row.investment)}
       </span>
     </div>
   );

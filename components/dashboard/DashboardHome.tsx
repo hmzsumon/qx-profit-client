@@ -63,8 +63,8 @@ export default function DashboardHome() {
   const teamVolume = rank?.overall?.teamVolume ?? 0;
   const currentRank =
     [...(rank?.ranks ?? [])].reverse().find((r) => r.qualified)?.name ?? "—";
-  const myProfit = board?.me?.profit ?? 0;
-  const myProfitRank = board?.me?.rank ?? null;
+  const myInvestment = board?.me?.investment ?? 0;
+  const myInvestmentRank = board?.me ? (board.me.rank ?? "20+") : null;
 
   const copyId = async () => {
     if (!customerId) return;
@@ -166,12 +166,12 @@ export default function DashboardHome() {
         {/* stat chips */}
         <section className="grid grid-cols-3 gap-2">
           <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
-            <p className="text-[11px] text-white/50">Today&apos;s QX profit</p>
+            <p className="text-[11px] text-white/50">My QX Investment</p>
             <p className="mt-1 text-sm font-bold text-[#12b76a]">
-              {usd(myProfit)}
+              {usd(myInvestment)}
             </p>
-            {myProfitRank && (
-              <p className="text-[10px] text-white/40">Rank #{myProfitRank}</p>
+            {myInvestmentRank && (
+              <p className="text-[10px] text-white/40">Rank #{myInvestmentRank}</p>
             )}
           </div>
           <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">

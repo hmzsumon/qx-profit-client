@@ -6,13 +6,13 @@ export type ProfitRankRow = {
   name: string;
   avatar: string;
   country: string;
-  profit: number;
+  investment: number;
   isMe: boolean;
 };
 
 export type ProfitLeaderboard = {
   top: ProfitRankRow[];
-  me: { rank: number; profit: number } | null;
+  me: { rank: number | null; investment: number } | null;
 };
 
 export const leaderboardApi = apiSlice.injectEndpoints({
