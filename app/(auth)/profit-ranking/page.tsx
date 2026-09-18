@@ -16,7 +16,7 @@ export default function ProfitRankingPage() {
             <Trophy size={20} />
           </span>
           <div>
-            <h1 className="text-xl font-bold tracking-tight">Profit Ranking</h1>
+            <h1 className="text-xl font-bold tracking-tight">Top Investment</h1>
             <p className="text-xs text-white/50">
               Top 20 partners by total QX Investment amount
             </p>
@@ -39,7 +39,7 @@ export default function ProfitRankingPage() {
         {!isLoading && isError && (
           <ErrorState
             title="Failed to load"
-            subtitle="We could not fetch the profit ranking."
+            subtitle="We could not fetch the top investment list."
             retryLabel="Reload"
             onRetry={() => refetch()}
           />

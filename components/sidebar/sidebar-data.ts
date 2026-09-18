@@ -61,7 +61,7 @@ export const NAV_ITEMS: NavItem[] = [
   },
   {
     key: "profit-ranking",
-    label: "Profit Ranking",
+    label: "Top Investment",
     icon: Trophy,
     href: "/profit-ranking",
   },

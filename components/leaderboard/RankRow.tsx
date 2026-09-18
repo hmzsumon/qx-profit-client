@@ -1,4 +1,4 @@
-/* ────────── Profit ranking — single row ────────── */
+/* ────────── Top Investment — single row ────────── */
 "use client";
 
 import Avatar from "@/components/ui/avatar";

@@ -36,7 +36,7 @@ const QUICK_ACTIONS = [
   { label: "Deposit", href: "/deposit", icon: ArrowDownToLine },
   { label: "Withdraw", href: "/withdraw", icon: ArrowUpFromLine },
   { label: "QX Investment", href: "/trade-investment", icon: TrendingUp },
-  { label: "Profit Ranking", href: "/profit-ranking", icon: Trophy },
+  { label: "Top Investment", href: "/profit-ranking", icon: Trophy },
 ];
 
 export default function DashboardHome() {

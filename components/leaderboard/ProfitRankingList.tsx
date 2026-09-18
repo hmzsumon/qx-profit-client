@@ -1,4 +1,4 @@
-/* ────────── Profit ranking — list ────────── */
+/* ────────── Top Investment — list ────────── */
 "use client";
 
 import type { ProfitLeaderboard } from "@/redux/features/leaderboard/leaderboardApi";

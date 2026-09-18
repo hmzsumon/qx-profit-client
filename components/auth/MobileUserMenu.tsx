@@ -20,7 +20,7 @@ import { useSelector } from "react-redux";
 const LINKS = [
   { label: "Home", href: "/", icon: Home },
   { label: "Dashboard", href: "/dashboard", icon: Grid2x2 },
-  { label: "Profit Ranking", href: "/profit-ranking", icon: Trophy },
+  { label: "Top Investment", href: "/profit-ranking", icon: Trophy },
   { label: "Settings", href: "/settings/profile", icon: Settings },
 ];
 
