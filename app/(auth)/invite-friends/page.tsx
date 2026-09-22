@@ -14,9 +14,9 @@ const InviteFriends = () => {
   // create referral link wit user customer_id
   let referralLink = "";
   if (process.env.NODE_ENV === "development") {
-    referralLink = `http://${host}/register?referral_code=${user?.customerId}`;
+    referralLink = `http://${host}/register-login?tab=create&referral_code=${encodeURIComponent(user?.customerId ?? "")}`;
   } else {
-    referralLink = `https://${host}/register?referral_code=${user?.customerId}`;
+    referralLink = `https://${host}/register-login?tab=create&referral_code=${encodeURIComponent(user?.customerId ?? "")}`;
   }
   // short referral link
   const shortReferralLink = referralLink.slice(0, 22) + "...";

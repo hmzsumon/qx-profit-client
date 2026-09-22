@@ -35,6 +35,13 @@ const FIXED_CURRENCY = "USDT";
 const QxRegisterForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const referralFromUrl = (
+    searchParams.get("referral_code") ||
+    searchParams.get("referralCode") ||
+    searchParams.get("partnerCode") ||
+    searchParams.get("ref") ||
+    ""
+  ).trim().toUpperCase();
   const seededEmail = (searchParams.get("email") ?? "").trim().toLowerCase();
   const [registerUser, { isLoading }] = useRegisterUserMutation();
 
@@ -42,6 +49,7 @@ const QxRegisterForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => 
     register,
     control,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<QxRegisterValues>({
     resolver: zodResolver(qxRegisterSchema),
@@ -52,17 +60,24 @@ const QxRegisterForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => 
       email: seededEmail,
       password: "",
       confirmPassword: "",
-      promoCode: "",
+      promoCode: referralFromUrl,
       ageAndAgreement: false,
       notUSTaxPayer: false,
     },
   });
+
+  React.useEffect(() => {
+    if (referralFromUrl) {
+      setValue("promoCode", referralFromUrl, { shouldValidate: true });
+    }
+  }, [referralFromUrl, setValue]);
 
   /* ── submit → map to /register payload ── */
   const submit = handleSubmit(async (values) => {
     const tId = toast.loading("Creating account...");
     try {
       const derivedName = values.email.split("@")[0] || "trader";
+      const partnerCode = referralFromUrl || (values.promoCode ?? "").trim().toUpperCase();
       await registerUser({
         name: derivedName,
         email: values.email.trim().toLowerCase(),
@@ -70,8 +85,8 @@ const QxRegisterForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => 
         confirmPassword: values.confirmPassword,
         country: values.country,
         currency: FIXED_CURRENCY,
-        partnerCode: values.promoCode || "",
-        promoCode: values.promoCode || "",
+        partnerCode,
+        promoCode: partnerCode,
         notUSTaxPayer: values.notUSTaxPayer,
         acceptedAgreement: values.ageAndAgreement,
       }).unwrap();
@@ -134,11 +149,16 @@ const QxRegisterForm: React.FC<{ onSuccess?: () => void }> = ({ onSuccess }) => 
       </QxField>
 
       {/* ── Promo code (optional) ── */}
-      <QxField label="Promo code (optional)" error={errors.promoCode?.message}>
+      <QxField label="Referral code (optional)" error={errors.promoCode?.message}>
         <div className="flex items-center">
-          <QxInput {...register("promoCode")} className="pr-2" />
+          <QxInput
+            {...register("promoCode")}
+            readOnly={Boolean(referralFromUrl)}
+            autoComplete="off"
+            className="pr-2"
+          />
           <span className="mr-3 shrink-0 border-l border-white/15 pl-3 text-[13px] font-semibold text-gray-500">
-            Apply
+            {referralFromUrl ? "Locked" : "Optional"}
           </span>
         </div>
       </QxField>
