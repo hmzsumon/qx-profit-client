@@ -1,16 +1,16 @@
 const DAY = 86400000;
 const DHAKA_OFFSET = 6 * 3600000;
 
-// Mirrors the existing API cron: 30 1 * * 1-5, Asia/Dhaka.
+// Mirrors the API cron: 1 0 * * *, Asia/Dhaka (00:01 Bangladesh time).
 // Keep this display schedule aligned if that cron is changed later.
 export function investmentProgress(now: number, excludedWeekDays: number[] = []) {
   const local = new Date(now + DHAKA_OFFSET);
   const midnight = Date.UTC(local.getUTCFullYear(), local.getUTCMonth(), local.getUTCDate()) - DHAKA_OFFSET;
   let nextRun: number | null = null;
   for (let offset = 0; offset < 8; offset++) {
-    const candidate = midnight + offset * DAY + 90 * 60000;
+    const candidate = midnight + offset * DAY + 60000;
     const weekday = new Date(candidate + DHAKA_OFFSET).getUTCDay();
-    if (candidate > now && weekday >= 1 && weekday <= 5 && !excludedWeekDays.includes(weekday)) {
+    if (candidate > now && !excludedWeekDays.includes(weekday)) {
       nextRun = candidate;
       break;
     }
