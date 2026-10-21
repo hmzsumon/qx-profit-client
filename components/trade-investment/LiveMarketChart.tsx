@@ -1,6 +1,6 @@
 "use client";
 
-import { ColorType, createChart, type UTCTimestamp } from "lightweight-charts";
+import { ColorType, createChart, LineStyle, LineType, type UTCTimestamp } from "lightweight-charts";
 import { useEffect, useRef, useState } from "react";
 import { Activity, ChevronDown, RefreshCw } from "lucide-react";
 import baseUrl from "@/config/baseUrl";
@@ -21,7 +21,7 @@ function formatterFor(symbol: string) {
   return new Intl.NumberFormat("en-US", { minimumFractionDigits: digits, maximumFractionDigits: digits });
 }
 
-export default function LiveMarketChart() {
+export default function LiveMarketChart({ variant = "candles" }: { variant?: "candles" | "area" }) {
   const container = useRef<HTMLDivElement>(null);
   const [interval, setIntervalValue] = useState<(typeof intervals)[number]>("1m");
   const [pair, setPair] = useState<(typeof pairs)[number]>(pairs[0]);
@@ -36,13 +36,22 @@ export default function LiveMarketChart() {
     const chart = createChart(host, {
       width: host.clientWidth, height: host.clientHeight,
       layout: { background: { type: ColorType.Solid, color: "#131b24" }, textColor: "#94a3b8", fontSize: 11 },
-      grid: { vertLines: { color: "#ffffff08" }, horzLines: { color: "#ffffff08" } },
+      grid: { vertLines: { color: "#ffffff08", style: LineStyle.Dashed }, horzLines: { color: "#ffffff08", style: LineStyle.Dashed } },
       rightPriceScale: { borderColor: "#ffffff12", scaleMargins: { top: 0.12, bottom: 0.08 } },
       timeScale: { borderColor: "#ffffff12", timeVisible: true, secondsVisible: false, rightOffset: 3 },
       handleScroll: { vertTouchDrag: false },
     });
-    const candles = chart.addCandlestickSeries({ upColor: "#10b981", downColor: "#f87171", wickUpColor: "#10b981", wickDownColor: "#f87171", borderVisible: false });
-    const observer = new ResizeObserver(() => chart.resize(host.clientWidth, host.clientHeight));
+    const priceFormat = { type: "price" as const, precision: pair.symbol.includes("JPY") ? 3 : 5, minMove: pair.symbol.includes("JPY") ? 0.001 : 0.00001 };
+    // Adapted from ExpertOption's PriceChart, without trade queries or overlays.
+    const area = variant === "area" ? chart.addAreaSeries({
+      lineColor: "#3b82f6", topColor: "rgba(59,130,246,0.28)", bottomColor: "rgba(59,130,246,0.02)",
+      lineWidth: 2, lineType: LineType.WithSteps, priceLineColor: "#3b82f6",
+      priceLineStyle: LineStyle.Solid, priceFormat,
+    }) : null;
+    const candles = variant === "candles" ? chart.addCandlestickSeries({ upColor: "#10b981", downColor: "#f87171", wickUpColor: "#10b981", wickDownColor: "#f87171", borderVisible: false, priceFormat }) : null;
+    const observer = new ResizeObserver(() => {
+      if (host.clientWidth > 0 && host.clientHeight > 0) chart.resize(host.clientWidth, host.clientHeight);
+    });
     observer.observe(host);
     let disposed = false;
     let fitted = false;
@@ -71,11 +80,19 @@ export default function LiveMarketChart() {
           return { time: c.time as UTCTimestamp, open: c.open, high: c.high, low: c.low, close: c.close };
         });
         if (disposed) return;
-        candles.setData(points);
-        if (!fitted) { chart.timeScale().fitContent(); fitted = true; }
+        points.sort((a, b) => Number(a.time) - Number(b.time));
+        const uniquePoints = points.filter((p, i) => !i || p.time !== points[i - 1].time);
+        candles?.setData(uniquePoints);
+        area?.setData(uniquePoints.map(p => ({ time: p.time, value: p.close })));
+        if (!fitted) {
+          const visiblePoints = host.clientWidth < 640 ? 35 : 65;
+          chart.timeScale().setVisibleLogicalRange({ from: Math.max(0, uniquePoints.length - visiblePoints), to: uniquePoints.length + 3 });
+          fitted = true;
+        }
         const last = points[points.length - 1];
         setQuote({ price: last.close, change: ((last.close - last.open) / last.open) * 100 });
-        setStatus(json.stale ? "Delayed data" : "Live");
+        const intervalSeconds = { "1m": 60, "5m": 300, "15m": 900, "1h": 3600 }[interval];
+        setStatus(json.stale || Date.now() / 1000 - Number(last.time) > intervalSeconds * 2 ? "Delayed data" : "Live");
       } catch {
         failed = true;
         if (!disposed) setStatus("Connection interrupted");
@@ -86,7 +103,7 @@ export default function LiveMarketChart() {
     };
     void refresh();
     return () => { disposed = true; clearTimeout(timer); controller?.abort(); observer.disconnect(); chart.remove(); };
-  }, [interval, pair, retry]);
+  }, [interval, pair, retry, variant]);
 
   const priceFormat = formatterFor(pair.symbol);
 
@@ -136,9 +153,10 @@ export default function LiveMarketChart() {
         <div className="mt-4 flex items-center gap-1" aria-label="Chart timeframe">{intervals.map(value => <button key={value} onClick={() => setIntervalValue(value)} aria-pressed={interval === value} className={`min-h-10 min-w-11 rounded-lg px-3 text-sm ${interval === value ? "bg-sky-500/15 text-sky-300 ring-1 ring-sky-400/30" : "text-white/55 hover:bg-white/5"}`}>{value}</button>)}</div>
       </div>
       <div className="relative">
-        <div ref={container} className="h-[260px] w-full sm:h-[330px]" aria-label="Live forex candlesticks; chart times in UTC" />
+        <div ref={container} className="h-[280px] w-full min-w-0 sm:h-[360px]" aria-label={`Live forex ${variant === "area" ? "price chart" : "candlesticks"}; chart times in UTC`} />
         {!quote && <div className="absolute inset-0 grid place-items-center bg-[#131b24]/90 px-5 text-center text-sm text-white/60">{status === "Connecting" ? "Loading live candles…" : <div><p>Market data is temporarily unavailable.</p><button onClick={() => setRetry(v => v + 1)} className="mx-auto mt-3 flex min-h-11 items-center gap-2 text-sky-300"><RefreshCw size={16} /> Retry connection</button></div>}</div>}
       </div>
+      <p className="px-4 py-3 text-[11px] text-white/40">Forex data · Refreshes every 5 seconds · UTC</p>
     </section>
   );
 }

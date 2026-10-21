@@ -1,17 +1,15 @@
 /* ────────── Smart dashboard home ──────────
-   Balance + copyable ID, quick actions, live stats, then the daily
-   video below.
+   Balance + copyable ID, quick actions, live stats, then the live
+   market chart below.
    ───────────────────────────────────────── */
 
 "use client";
 
 import AnnouncementBanner from "@/components/announcements/AnnouncementBanner";
-import DailyVideoHistory from "@/components/dashboard/DailyVideoHistory";
-import DailyVideoPlayer from "@/components/dashboard/DailyVideoPlayer";
+import dynamic from "next/dynamic";
 import KycStatusChip from "@/components/kyc/KycStatusChip";
 import Avatar from "@/components/ui/avatar";
 import { formatBalance } from "@/lib/functions";
-import { useGetDailyVideosQuery } from "@/redux/features/daily-video/dailyVideoApi";
 import { useGetProfitLeaderboardQuery } from "@/redux/features/leaderboard/leaderboardApi";
 import { useGetMyRankSummaryQuery } from "@/redux/features/rank/rankApi";
 import {
@@ -25,9 +23,14 @@ import {
   Trophy,
 } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+
+const LiveCandlestickChart = dynamic(
+  () => import("@/components/dashboard/LiveCandlestickChart"),
+  { ssr: false, loading: () => <div className="h-[420px] animate-pulse rounded-2xl bg-white/5" /> },
+);
 
 const usd = (v: number) =>
   `$${Number(v || 0).toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
@@ -43,17 +46,6 @@ export default function DashboardHome() {
   const { user } = useSelector((s: any) => s.auth);
   const [hidden, setHidden] = useState(false);
   const [copied, setCopied] = useState(false);
-
-  const { data: videoData, isLoading: videoLoading, isError: videoError } =
-    useGetDailyVideosQuery();
-  const videos = videoData?.videos ?? [];
-  const [activeId, setActiveId] = useState<string | null>(null);
-  useEffect(() => {
-    if (videos.length && !videos.some((v) => v._id === activeId)) {
-      setActiveId(videos[0]._id);
-    }
-  }, [videos, activeId]);
-  const activeVideo = videos.find((v) => v._id === activeId) ?? videos[0];
 
   const { data: rank } = useGetMyRankSummaryQuery();
   const { data: board } = useGetProfitLeaderboardQuery();
@@ -184,31 +176,7 @@ export default function DashboardHome() {
           </div>
         </section>
 
-        {/* daily video */}
-        <section className="rounded-2xl border border-white/10 bg-[#111418] p-2 sm:p-3">
-          <h2 className="mb-3 px-1 text-sm font-semibold">Daily video</h2>
-
-          {videoLoading && (
-            <div className="aspect-video w-full animate-pulse rounded-xl bg-neutral-800" />
-          )}
-
-          {!videoLoading && (videoError || videos.length === 0) && (
-            <p className="py-8 text-center text-sm text-neutral-400">
-              No video available yet. Check back soon.
-            </p>
-          )}
-
-          {!videoLoading && activeVideo && (
-            <div className="space-y-4">
-              <DailyVideoPlayer video={activeVideo} />
-              <DailyVideoHistory
-                videos={videos}
-                activeId={activeVideo._id}
-                onSelect={(v) => setActiveId(v._id)}
-              />
-            </div>
-          )}
-        </section>
+        <LiveCandlestickChart />
       </div>
     </main>
   );
