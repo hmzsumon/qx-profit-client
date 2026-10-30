@@ -1,4 +1,4 @@
-/* ────────── QX PROFIT — Public (marketing) layout ──────────
+/* ────────── QX BROKER — Public (marketing) layout ──────────
    Shared chrome for Home, FAQ, About, Blog and Demo pages:
    fixed navbar on top, footer at the bottom, dark page canvas.
    ────────────────────────────────────────────────────────── */

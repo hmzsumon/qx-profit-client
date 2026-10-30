@@ -1,4 +1,4 @@
-/* ────────── QX PROFIT — Blog: featured article ──────────
+/* ────────── QX BROKER — Blog: featured article ──────────
    The lead post, shown in full so the page carries real,
    detailed content about the platform.
    ────────────────────────────────────────────────────── */
@@ -19,13 +19,13 @@ const QxBlogFeatured: React.FC = () => (
 
         {/* ── Title ── */}
         <h2 className="mt-4 text-2xl font-extrabold leading-snug tracking-tight text-white sm:text-[32px]">
-          QX Profit: how the platform works and why traders choose it
+          Qx Broker: how the platform works and why traders choose it
         </h2>
 
         {/* ── Body ── */}
         <div className="mt-6 space-y-4 text-sm leading-relaxed text-gray-400">
           <p>
-            QX Profit is a digital options trading platform. In plain terms, you
+            Qx Broker is a digital options trading platform. In plain terms, you
             pick an asset — a currency pair, a stock, an index, a metal or a
             cryptocurrency — decide how much to invest, choose how long the trade
             should run, and predict whether the price will be higher or lower
@@ -73,7 +73,7 @@ const QxBlogFeatured: React.FC = () => (
             <li>
               <span className="text-gray-300">Fast payments</span> — most
               withdrawals are processed within minutes to a few business days,
-              with no deposit fee from QX Profit.
+              with no deposit fee from Qx Broker.
             </li>
           </ul>
 

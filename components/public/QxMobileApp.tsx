@@ -1,4 +1,4 @@
-/* ────────── QX PROFIT — Mobile app section ──────────
+/* ────────── QX BROKER — Mobile app section ──────────
    Rating badge + phone screenshot on the left, pitch + store
    badges on the right.
    ─────────────────────────────────────────────────── */
@@ -42,7 +42,7 @@ const QxMobileApp: React.FC = () => (
 
           <Image
             src={phoneShot}
-            alt="QX Profit mobile trading app"
+            alt="Qx Broker mobile trading app"
             placeholder="blur"
             className="h-auto w-[240px] sm:w-[280px]"
           />

@@ -30,7 +30,7 @@ export default function PartnerLevelCards() {
 
       <div className="mx-auto max-w-6xl px-4 py-16">
         <h2 className="text-center text-2xl font-extrabold tracking-tight text-white sm:text-[32px]">
-          Enhanced Affiliate Level Cards for QX Profit
+          Enhanced Affiliate Level Cards for Qx Broker
         </h2>
         <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-[#8b93a7]">
           Levels unlock as your active referrals grow. Higher levels raise your

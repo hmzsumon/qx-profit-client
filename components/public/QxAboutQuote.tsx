@@ -1,4 +1,4 @@
-/* ────────── QX PROFIT — About: manifesto quote ──────────
+/* ────────── QX BROKER — About: manifesto quote ──────────
    Large pull-quote explaining why the platform exists, over a
    faint chart line with a row of trader avatars.
    ──────────────────────────────────────────────────────── */

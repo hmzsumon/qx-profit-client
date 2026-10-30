@@ -11,7 +11,7 @@ const REVIEWS = [
     country: "India",
     flag: "/partner/flag-in.svg",
     tint: "bg-[#FFF3EC]",
-    text: "I didn't expect much from support at first, but QX Profit changed that. Whenever I had questions or needed creatives, my manager actually helped. Once I had a tracking issue — they fixed it the same day. Payments are always on time, and the bonus system motivates you to grow. It's not just numbers — you feel like they care.",
+    text: "I didn't expect much from support at first, but Qx Broker changed that. Whenever I had questions or needed creatives, my manager actually helped. Once I had a tracking issue — they fixed it the same day. Payments are always on time, and the bonus system motivates you to grow. It's not just numbers — you feel like they care.",
     tags: ["#DedicatedManager", "#HighCommissions", "#TrustedPlatform"],
   },
   {
@@ -19,7 +19,7 @@ const REVIEWS = [
     country: "Nigeria",
     flag: "/partner/flag-ng.svg",
     tint: "bg-[#EEFBF1]",
-    text: "Most networks don't care about African GEOs, but QX Profit really works here. They support local payments and the dashboard updates quickly. I started without any background in finance, and within a week I was running campaigns in 3 languages. It's the first time I feel like I'm building something long term.",
+    text: "Most networks don't care about African GEOs, but Qx Broker really works here. They support local payments and the dashboard updates quickly. I started without any background in finance, and within a week I was running campaigns in 3 languages. It's the first time I feel like I'm building something long term.",
     tags: ["#LocalPayments", "#QuickStart", "#GlobalReach"],
   },
   {
@@ -27,7 +27,7 @@ const REVIEWS = [
     country: "Mexico",
     flag: "/partner/flag-mx.svg",
     tint: "bg-[#EEF4FF]",
-    text: "QX Profit keeps it simple: send traffic, get paid when users deposit and trade. No weird rules or surprises. I tested a few finance offers before, and this one gave me results quickly. No delays, clear dashboard, and I hit Level 3 within two months.",
+    text: "Qx Broker keeps it simple: send traffic, get paid when users deposit and trade. No weird rules or surprises. I tested a few finance offers before, and this one gave me results quickly. No delays, clear dashboard, and I hit Level 3 within two months.",
     tags: ["#StartWithNoRisk", "#AffiliateDashboard", "#EasyLevelUp"],
   },
 ];

@@ -1,4 +1,4 @@
-/* ────────── QX PROFIT — About Page (modular assembly) ────────── */
+/* ────────── QX BROKER — About Page (modular assembly) ────────── */
 
 import type { Metadata } from "next";
 import QxAboutIntro from "@/components/public/QxAboutIntro";
@@ -10,9 +10,9 @@ import QxAboutDemoCta from "@/components/public/QxAboutDemoCta";
 import QxAboutInnovation from "@/components/public/QxAboutInnovation";
 
 export const metadata: Metadata = {
-  title: "About us — QX Profit",
+  title: "About us — Qx Broker",
   description:
-    "QX Profit is a new-level trading platform built for everyone — fast, transparent digital asset trading with 300+ assets and a free demo account.",
+    "Qx Broker is a new-level trading platform built for everyone — fast, transparent digital asset trading with 300+ assets and a free demo account.",
 };
 
 export default function AboutPage(): JSX.Element {

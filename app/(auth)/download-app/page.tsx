@@ -14,7 +14,7 @@ export default function DownloadAppPage() {
   return (
     <main className="min-h-screen bg-[#0b0e11] text-white">
       <div className="mx-auto max-w-lg px-4 py-8">
-        <h1 className="text-xl font-extrabold tracking-tight">QX Profit App</h1>
+        <h1 className="text-xl font-extrabold tracking-tight">Qx Broker App</h1>
         <p className="mt-1 text-sm text-neutral-400">
           Install the Android app for faster access to your account.
         </p>
@@ -25,7 +25,7 @@ export default function DownloadAppPage() {
               <Smartphone size={22} />
             </span>
             <div className="min-w-0">
-              <p className="font-semibold">QX Profit for Android</p>
+              <p className="font-semibold">Qx Broker for Android</p>
               <p className="text-xs text-neutral-400">APK • ~1.5 MB</p>
             </div>
           </div>

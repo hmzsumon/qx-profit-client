@@ -1,4 +1,4 @@
-/* ────────── QX PROFIT — Sign in form ──────────
+/* ────────── QX BROKER — Sign in form ──────────
    Step 1: email + password. Admin-verified users sign in directly;
    other users continue to the emailed OTP step (QxLoginOtp).
    ───────────────────────────────────────────── */

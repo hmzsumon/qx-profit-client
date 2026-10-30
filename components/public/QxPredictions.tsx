@@ -1,4 +1,4 @@
-/* ────────── QX PROFIT — Trading predictions block ──────────
+/* ────────── QX BROKER — Trading predictions block ──────────
    Light panel on the dark page. Left: pitch + CTA + mini chart.
    Right: 2 × 2 grid of the four trading steps.
    ────────────────────────────────────────────────────────── */

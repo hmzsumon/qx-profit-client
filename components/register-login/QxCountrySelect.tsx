@@ -1,4 +1,4 @@
-/* ────────── QX PROFIT — Country / Region combobox ──────────
+/* ────────── QX BROKER — Country / Region combobox ──────────
    Searchable dropdown (globe icon + "Search" + chevron) used in
    the registration form. Meant to sit inside <QxField>.
    ──────────────────────────────────────────────────────────── */

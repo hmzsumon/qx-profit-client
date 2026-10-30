@@ -1,4 +1,4 @@
-/* ────────── QX PROFIT — About: intro + founding story ──────────
+/* ────────── QX BROKER — About: intro + founding story ──────────
    Page heading, the "new level platform" statement, the team
    paragraph and a small founding-year timeline on the right.
    ──────────────────────────────────────────────────────────── */
@@ -18,7 +18,7 @@ const QxAboutIntro: React.FC = () => (
         {/* ── Story copy ── */}
         <div>
           <p className="text-lg font-bold text-white">
-            QX Profit — it is a new level trading platform.
+            Qx Broker — it is a new level trading platform.
           </p>
           <p className="mt-4 text-sm leading-relaxed text-gray-400">
             Our team launched the project in 2019, and it has already managed to
@@ -30,7 +30,7 @@ const QxAboutIntro: React.FC = () => (
             mechanisms to build a genuinely modern platform.
           </p>
           <p className="mt-4 text-sm leading-relaxed text-gray-400">
-            QX Profit was built around one idea: fast, honest and transparent
+            Qx Broker was built around one idea: fast, honest and transparent
             trading that anyone can start — whether you open your first trade
             today or you have been trading for years.
           </p>

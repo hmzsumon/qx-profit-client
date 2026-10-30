@@ -1,4 +1,4 @@
-/* ────────── QX PROFIT — "Trade on demo" banner ──────────
+/* ────────── QX BROKER — "Trade on demo" banner ──────────
    Slim call-to-action strip between the features grid and the
    trading-predictions block.
    ─────────────────────────────────────────────────────────── */

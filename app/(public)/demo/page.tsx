@@ -1,9 +1,9 @@
-/* ────────── QX PROFIT — Demo account (placeholder) ────────── */
+/* ────────── QX BROKER — Demo account (placeholder) ────────── */
 
 import type { Metadata } from "next";
 import QxComingSoon from "@/components/public/QxComingSoon";
 
-export const metadata: Metadata = { title: "Demo account — QX Profit" };
+export const metadata: Metadata = { title: "Demo account — Qx Broker" };
 
 export default function DemoPage() {
   return (

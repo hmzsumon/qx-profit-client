@@ -4,9 +4,9 @@ import Link from "next/link";
 import React from "react";
 
 /*
-  QX Profit brand logo — single source of truth.
+  Qx Broker brand logo — single source of truth.
   Vector artwork supplied by the brand (images/qs_logo.svg): isometric cube mark
-  + "QX PROFIT" wordmark. All fills are currentColor so the colour follows text
+  + "QX BROKER" wordmark. All fills are currentColor so the colour follows text
   classes on the wrapper (defaults to white). Edit this file to change the logo
   on every surface (public, auth, in-app) in this app.
 */
@@ -60,11 +60,11 @@ const BrandLogo: React.FC<BrandLogoProps> = ({
         viewBox={`0 0 ${vbW} 30`}
         fill="currentColor"
         role="img"
-        aria-label="QX Profit"
+        aria-label="Qx Broker"
         className={`shrink-0 ${wordmarkClassName}`}
       >
         <path d={MARK_PATH} />
-        {!isMark && WORD_PATHS.map((d, i) => <path key={i} d={d} />)}
+        {!isMark && <text x="35" y="21" fontSize="17" fontFamily="Arial, sans-serif" fontWeight="700">Qx Broker</text>}
       </svg>
     </span>
   );

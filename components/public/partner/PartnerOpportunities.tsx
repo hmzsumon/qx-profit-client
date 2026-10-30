@@ -35,7 +35,7 @@ export default function PartnerOpportunities() {
           Exclusive Opportunities for Our Partners
         </h2>
         <p className="mx-auto mt-3 max-w-2xl text-center text-sm text-[#8b93a7]">
-          At QX Profit, we go beyond standard affiliate programs by offering
+          At Qx Broker, we go beyond standard affiliate programs by offering
           unique benefits to our partners.
         </p>
 
@@ -58,7 +58,7 @@ export default function PartnerOpportunities() {
 
         <p className="mx-auto mt-8 max-w-2xl text-center text-xs text-[#8b93a7]">
           These exclusive opportunities are designed to provide our partners with
-          unparalleled support and incentives. By joining QX Profit, you&apos;re
+          unparalleled support and incentives. By joining Qx Broker, you&apos;re
           aligning with a program that values and rewards your efforts.
         </p>
 

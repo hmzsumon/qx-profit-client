@@ -26,7 +26,7 @@ export default function PartnerCollaboration() {
         <div className="order-2 lg:order-1">
           <img
             src="/partner/collaboration.svg"
-            alt="How collaboration with QX Profit works"
+            alt="How collaboration with Qx Broker works"
             className="mx-auto w-full max-w-md"
           />
         </div>

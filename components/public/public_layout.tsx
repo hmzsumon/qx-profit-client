@@ -1,4 +1,4 @@
-/* ────────── QX PROFIT — Public Layout ────────── */
+/* ────────── QX BROKER — Public Layout ────────── */
 
 import QxFooter from "@/components/public/QxFooter";
 import QxNavbar from "@/components/public/QxNavbar";

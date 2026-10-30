@@ -7,6 +7,7 @@
 
 import AnnouncementBanner from "@/components/announcements/AnnouncementBanner";
 import dynamic from "next/dynamic";
+import DailyVideoSection from "@/components/dashboard/DailyVideoSection";
 import KycStatusChip from "@/components/kyc/KycStatusChip";
 import Avatar from "@/components/ui/avatar";
 import { formatBalance } from "@/lib/functions";
@@ -176,6 +177,7 @@ export default function DashboardHome() {
           </div>
         </section>
 
+        <DailyVideoSection />
         <LiveCandlestickChart />
       </div>
     </main>

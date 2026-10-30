@@ -1,4 +1,4 @@
-/* ────────── QX PROFIT — About: "How does the platform work?" ──────────
+/* ────────── QX BROKER — About: "How does the platform work?" ──────────
    Four simple steps, each with an icon, a bold verb and a short line.
    ─────────────────────────────────────────────────────────────────── */
 
