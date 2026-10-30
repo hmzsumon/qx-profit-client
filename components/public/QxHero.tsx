@@ -1,4 +1,4 @@
-/* ────────── QX BROKER — Hero ──────────
+/* ────────── QX PROFIT — Hero ──────────
    Headline + demo-bonus subline + primary CTA, sitting above the
    web-platform screenshot. Green radial glow behind the heading.
    ────────────────────────────────────── */
@@ -50,7 +50,7 @@ const QxHero: React.FC = () => (
       <div className="relative mx-auto mt-12 max-w-5xl">
         <Image
           src={platformShot}
-          alt="Qx Broker web trading platform"
+          alt="QX Profit web trading platform"
           priority
           placeholder="blur"
           className="w-full rounded-xl border border-white/10 shadow-2xl shadow-black/60"

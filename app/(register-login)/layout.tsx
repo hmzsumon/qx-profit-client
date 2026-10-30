@@ -1,4 +1,4 @@
-/* ────────── QX BROKER — Auth layout (Login / Registration) ──────────
+/* ────────── QX PROFIT — Auth layout (Login / Registration) ──────────
    Same navbar + footer as the marketing site, with a faint line-chart
    wash behind the auth card.
    ─────────────────────────────────────────────────────────────────── */

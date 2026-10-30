@@ -1,4 +1,4 @@
-/* Qx Broker brand logo — thin wrapper kept for existing imports.
+/* QX Profit brand logo — thin wrapper kept for existing imports.
    All rendering lives in the single source of truth: components/branding/BrandLogo. */
 
 import React from "react";

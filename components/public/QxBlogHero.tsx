@@ -1,4 +1,4 @@
-/* ────────── QX BROKER — Blog: header ──────────
+/* ────────── QX PROFIT — Blog: header ──────────
    Page heading, intro line and a static row of category chips.
    ───────────────────────────────────────────── */
 
@@ -23,7 +23,7 @@ const QxBlogHero: React.FC = () => (
       </h1>
       <p className="mt-3 max-w-2xl text-sm text-gray-400">
         Guides, explainers and platform news — everything you need to understand
-        how Qx Broker works and how to trade on it with confidence.
+        how QX Profit works and how to trade on it with confidence.
       </p>
 
       {/* ── Category chips ── */}

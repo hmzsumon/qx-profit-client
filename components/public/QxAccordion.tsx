@@ -1,4 +1,4 @@
-/* ────────── QX BROKER — Accordion ──────────
+/* ────────── QX PROFIT — Accordion ──────────
    Shared collapsible list used by the home FAQ teaser and the
    full /faq page. One panel open at a time by default.
    ─────────────────────────────────────────── */

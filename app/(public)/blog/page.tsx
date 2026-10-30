@@ -1,4 +1,4 @@
-/* ────────── QX BROKER — Blog Page (modular assembly) ────────── */
+/* ────────── QX PROFIT — Blog Page (modular assembly) ────────── */
 
 import type { Metadata } from "next";
 import QxBlogHero from "@/components/public/QxBlogHero";
@@ -6,9 +6,9 @@ import QxBlogFeatured from "@/components/public/QxBlogFeatured";
 import QxBlogList from "@/components/public/QxBlogList";
 
 export const metadata: Metadata = {
-  title: "Blog — Qx Broker",
+  title: "Blog — QX Profit",
   description:
-    "Guides and explainers about the Qx Broker trading platform: how digital options work, placing your first trade, deposits and withdrawals, signals, the demo account and bonuses.",
+    "Guides and explainers about the QX Profit trading platform: how digital options work, placing your first trade, deposits and withdrawals, signals, the demo account and bonuses.",
 };
 
 export default function BlogPage(): JSX.Element {

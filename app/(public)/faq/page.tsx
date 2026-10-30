@@ -1,4 +1,4 @@
-/* ────────── QX BROKER — FAQ Page ──────────
+/* ────────── QX PROFIT — FAQ Page ──────────
    Full frequently-asked-questions page, grouped into three
    categories. Each category renders a shared <QxAccordion>.
    ─────────────────────────────────────────── */
@@ -11,9 +11,9 @@ import QxAccordion, {
 } from "@/components/public/QxAccordion";
 
 export const metadata: Metadata = {
-  title: "FAQ — Qx Broker",
+  title: "FAQ — QX Profit",
   description:
-    "Answers to the most frequently asked questions about trading, deposits, withdrawals and account verification on Qx Broker.",
+    "Answers to the most frequently asked questions about trading, deposits, withdrawals and account verification on QX Profit.",
 };
 
 /* ────────── Data: General questions ────────── */
@@ -24,7 +24,7 @@ const GENERAL: QxAccordionItem[] = [
   },
   {
     q: "What are the varieties of digital options?",
-    a: "The most common type on Qx Broker is the up/down (higher/lower) option. You choose an asset, an investment amount and an expiry time, then predict the direction of the price.",
+    a: "The most common type on QX Profit is the up/down (higher/lower) option. You choose an asset, an investment amount and an expiry time, then predict the direction of the price.",
   },
   {
     q: "What is the gist of digital options trading?",
@@ -48,7 +48,7 @@ const GENERAL: QxAccordionItem[] = [
   },
   {
     q: "What is a trading platform and why is it needed?",
-    a: "It is the software that shows live price charts, indicators and the order panel you use to place trades. Qx Broker runs in any modern browser and on mobile — no installation is required.",
+    a: "It is the software that shows live price charts, indicators and the order panel you use to place trades. QX Profit runs in any modern browser and on mobile — no installation is required.",
   },
   {
     q: "What are the possible results of the placed trades?",
@@ -84,7 +84,7 @@ const FINANCIAL: QxAccordionItem[] = [
   },
   {
     q: "Is there any fee for depositing or withdrawing funds?",
-    a: "Qx Broker does not charge a deposit fee. Any withdrawal fee depends on the payment provider and is displayed before you confirm the request.",
+    a: "QX Profit does not charge a deposit fee. Any withdrawal fee depends on the payment provider and is displayed before you confirm the request.",
   },
   {
     q: "How often do I need to top up the account?",

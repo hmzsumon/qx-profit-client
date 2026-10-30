@@ -1,4 +1,4 @@
-/* ────────── QX BROKER — About: mission ──────────
+/* ────────── QX PROFIT — About: mission ──────────
    Platform screenshot with a "300+ assets" badge on the left,
    the "we want everyone to..." mission copy on the right.
    ─────────────────────────────────────────────── */
@@ -19,7 +19,7 @@ const QxAboutMission: React.FC = () => (
           </div>
           <Image
             src={platformShot}
-            alt="Qx Broker trading terminal"
+            alt="QX Profit trading terminal"
             placeholder="blur"
             className="w-full rounded-xl border border-white/10 shadow-2xl shadow-black/50"
           />
@@ -38,7 +38,7 @@ const QxAboutMission: React.FC = () => (
             grow their financial skills.
           </p>
           <p className="mt-4 text-sm leading-relaxed text-gray-400">
-            When it comes to tools, Qx Broker gives every client access to a
+            When it comes to tools, QX Profit gives every client access to a
             large set of free instruments so you can trade the way that suits
             you. Choose any market: currency pairs, stocks, indices, metals, oil,
             gas — as well as the main trend of recent years, cryptocurrencies.

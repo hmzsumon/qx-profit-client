@@ -5,7 +5,7 @@ import { Download, ExternalLink, FileText } from "lucide-react";
 const PDF = "/docs/business-plan.pdf";
 
 const HIGHLIGHTS = [
-  "How Qx Broker works, in 3 steps",
+  "How QX Profit works, in 3 steps",
   "QX Investment — daily profit, minimums & lock period",
   "Team income across 5 referral levels",
   "Rank Rewards (QX1–QX5) and their targets",
@@ -19,7 +19,7 @@ export default function BusinessPlanPage() {
       <div className="mx-auto max-w-3xl px-4 py-6">
         <h1 className="text-xl font-extrabold tracking-tight">Business Plan</h1>
         <p className="mt-1 text-sm text-neutral-400">
-          A short guide to how you earn on Qx Broker. Open it on your phone or
+          A short guide to how you earn on QX Profit. Open it on your phone or
           download the PDF.
         </p>
 
@@ -30,7 +30,7 @@ export default function BusinessPlanPage() {
               <FileText size={22} />
             </span>
             <div className="min-w-0">
-              <p className="font-semibold">Qx Broker — Business Plan</p>
+              <p className="font-semibold">QX Profit — Business Plan</p>
               <p className="text-xs text-neutral-400">PDF • 9 pages</p>
             </div>
           </div>
@@ -71,7 +71,7 @@ export default function BusinessPlanPage() {
         <div className="mt-4 hidden md:block">
           <iframe
             src={PDF}
-            title="Qx Broker Business Plan"
+            title="QX Profit Business Plan"
             className="h-[80vh] w-full rounded-xl border border-neutral-800"
           />
         </div>

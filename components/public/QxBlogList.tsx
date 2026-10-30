@@ -1,6 +1,6 @@
-/* ────────── QX BROKER — Blog: post grid ──────────
+/* ────────── QX PROFIT — Blog: post grid ──────────
    Grid of article cards. Each has a category, date, title and a
-   full-sentence excerpt describing the topic in Qx Broker terms.
+   full-sentence excerpt describing the topic in QX Profit terms.
    ─────────────────────────────────────────────── */
 
 import Link from "next/link";
@@ -18,7 +18,7 @@ const POSTS: Post[] = [
   {
     category: "Getting started",
     date: "12 Aug 2026",
-    title: "Your first trade on Qx Broker, step by step",
+    title: "Your first trade on QX Profit, step by step",
     excerpt:
       "Open the platform, pick an asset from the selector, set your investment and expiry time, then choose Up or Down. We walk through every button on the order panel and explain what the payout percentage next to each asset means.",
   },
@@ -27,19 +27,19 @@ const POSTS: Post[] = [
     date: "5 Aug 2026",
     title: "Digital options explained: up or down in 60 seconds",
     excerpt:
-      "A digital option has a fixed payout and a fixed expiry. You are not buying the asset — you are forecasting its direction. Here is how profit, loss and the rare tie result are calculated on Qx Broker.",
+      "A digital option has a fixed payout and a fixed expiry. You are not buying the asset — you are forecasting its direction. Here is how profit, loss and the rare tie result are calculated on QX Profit.",
   },
   {
     category: "Payments",
     date: "29 Jul 2026",
     title: "Deposits and withdrawals: methods, limits and timing",
     excerpt:
-      "Fund a real account from 10 USD using cards, e-wallets or crypto. Qx Broker does not charge a deposit fee; withdrawal fees depend on the provider and are shown before you confirm. Most requests clear within minutes to 3 business days.",
+      "Fund a real account from 10 USD using cards, e-wallets or crypto. QX Profit does not charge a deposit fee; withdrawal fees depend on the provider and are shown before you confirm. Most requests clear within minutes to 3 business days.",
   },
   {
     category: "Strategy",
     date: "21 Jul 2026",
-    title: "Using signals and indicators inside Qx Broker",
+    title: "Using signals and indicators inside QX Profit",
     excerpt:
       "Add moving averages, Bollinger Bands, RSI and the built-in signal feed to any chart. Test combinations on the demo account first and keep the ones that match your trading style and preferred expiry.",
   },
@@ -53,7 +53,7 @@ const POSTS: Post[] = [
   {
     category: "Bonuses",
     date: "3 Jul 2026",
-    title: "Tournaments and bonus programs for Qx Broker traders",
+    title: "Tournaments and bonus programs for QX Profit traders",
     excerpt:
       "Join scheduled tournaments and giveaways to compete for prize pools, and check the current deposit bonus terms before you top up. We explain wagering conditions so there are no surprises at withdrawal.",
   },

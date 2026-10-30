@@ -47,7 +47,7 @@ export default function PartnerSupportCta() {
           className="rounded-2xl border border-white/[0.06] bg-white p-6 text-[#0B1220] shadow-2xl"
         >
           <div className="flex items-center gap-2">
-            <img src="/partner/form-logo.svg" alt="Qx Broker" className="h-7 w-auto" />
+            <img src="/partner/form-logo.svg" alt="QX Profit" className="h-7 w-auto" />
           </div>
           <h3 className="mt-4 text-lg font-extrabold">Registration</h3>
 

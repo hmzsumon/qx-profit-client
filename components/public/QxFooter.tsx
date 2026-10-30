@@ -1,4 +1,4 @@
-/* ────────── QX BROKER — Public Footer ──────────
+/* ────────── QX PROFIT — Public Footer ──────────
    Minimal partner-program footer: brand, one legal line, a few links.
    ──────────────────────────────────────────────── */
 
@@ -30,7 +30,7 @@ const QxFooter: React.FC = () => (
       </nav>
 
       <p className="text-[12px] text-gray-500">
-        © {new Date().getFullYear()} Qx Broker. All rights reserved
+        © {new Date().getFullYear()} QX Profit. All rights reserved
       </p>
     </div>
   </footer>

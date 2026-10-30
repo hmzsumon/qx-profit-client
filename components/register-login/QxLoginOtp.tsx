@@ -1,4 +1,4 @@
-/* ────────── QX BROKER — Login OTP step ──────────
+/* ────────── QX PROFIT — Login OTP step ──────────
    Shown after email + password succeed: enter the 6-digit code that
    was emailed, then the session is issued.
    ─────────────────────────────────────────────── */

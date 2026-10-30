@@ -1,5 +1,5 @@
-/* ────────── QX BROKER — Auth form schemas ──────────
-   Zod schemas for the Qx Broker Login / Registration forms.
+/* ────────── QX PROFIT — Auth form schemas ──────────
+   Zod schemas for the QX Profit Login / Registration forms.
    ─────────────────────────────────────────────────── */
 
 import { z } from "zod";

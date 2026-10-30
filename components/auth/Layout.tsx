@@ -25,7 +25,7 @@ export default function DashboardLayout({
     : "md:grid-cols-[280px_1fr]";
 
   return (
-    <div className="qx-broker-panel min-h-screen bg-neutral-950 text-neutral-100">
+    <div className="min-h-screen bg-neutral-950 text-neutral-100">
       {/* pass open + toggle to header so icon swaps (Menu/X) */}
       <Header open={mobileOpen} onToggle={() => setMobileOpen((v) => !v)} />
 

@@ -1,4 +1,4 @@
-/* ────────── QX BROKER — About: closing innovation banner ──────────
+/* ────────── QX PROFIT — About: closing innovation banner ──────────
    Centred headline over the platform screenshot ringed with asset
    bubbles, plus the two account CTAs.
    ────────────────────────────────────────────────────────────── */
@@ -21,7 +21,7 @@ const QxAboutInnovation: React.FC = () => (
     <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
       {/* ── Heading ── */}
       <h2 className="text-2xl font-extrabold leading-snug tracking-tight text-white sm:text-[32px]">
-        Qx Broker: an innovation platform for digital asset trading
+        QX Profit: an innovation platform for digital asset trading
       </h2>
 
       {/* ── Screenshot + bubbles ── */}
@@ -36,7 +36,7 @@ const QxAboutInnovation: React.FC = () => (
         ))}
         <Image
           src={platformShot}
-          alt="Qx Broker platform overview"
+          alt="QX Profit platform overview"
           placeholder="blur"
           className="w-full rounded-xl border border-white/10 shadow-2xl shadow-black/50"
         />

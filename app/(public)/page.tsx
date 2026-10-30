@@ -1,4 +1,4 @@
-/* ────────── QX BROKER — Home Page (partner-program layout) ────────── */
+/* ────────── QX PROFIT — Home Page (partner-program layout) ────────── */
 
 import PartnerHero from "@/components/public/partner/PartnerHero";
 import PartnerPayoutStrip from "@/components/public/partner/PartnerPayoutStrip";

@@ -1,6 +1,6 @@
 "use client";
 
-/* ────────── QX BROKER — Auth page (Login / Registration) ──────────
+/* ────────── QX PROFIT — Auth page (Login / Registration) ──────────
    One route, two tabs. The tab is mirrored to the URL (?tab=signin |
    ?tab=create) so the navbar "Log in" / "Sign up" links land on the
    right form.

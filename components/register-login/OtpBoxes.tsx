@@ -1,4 +1,4 @@
-/* ────────── QX BROKER — OTP box input ──────────
+/* ────────── QX PROFIT — OTP box input ──────────
    Controlled N-digit code input. Paste fills every box at once; typing
    advances one box at a time; Backspace / arrows move between boxes.
    ─────────────────────────────────────────────── */

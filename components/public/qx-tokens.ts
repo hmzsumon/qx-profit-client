@@ -1,5 +1,5 @@
 /* ──────────────────────────────────────────────────────────────
-   QX BROKER — Public site design tokens
+   QX PROFIT — Public site design tokens
    ------------------------------------------------------------------
    Single source of truth for the colours / spacing used across the
    public marketing pages (Home, FAQ, Login, Registration, footer…).

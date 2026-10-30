@@ -1,4 +1,4 @@
-/* ────────── QX BROKER — Testimonials ──────────
+/* ────────── QX PROFIT — Testimonials ──────────
    "What people say about us" — 3 × 2 review cards with a
    five-star rating, then a "View all reviews" CTA.
    ───────────────────────────────────────────── */
@@ -31,25 +31,25 @@ const REVIEWS: Review[] = [
     name: "Abhi",
     date: "28.11.2024",
     earned: "$1041",
-    text: "Genuinely a great trading platform. I tried a lot of trading apps, but now that I have found Qx Broker, I am sticking to it. Withdrawals are fast and support actually replies.",
+    text: "Genuinely a great trading platform. I tried a lot of trading apps, but now that I have found QX Profit, I am sticking to it. Withdrawals are fast and support actually replies.",
   },
   {
     name: "Sonal",
     date: "25.11.2024",
     earned: "$398",
-    text: "I've had nothing but positive experiences with Qx Broker over the years that I've been using it. The platform is intuitive and the user-friendly design keeps me coming back.",
+    text: "I've had nothing but positive experiences with QX Profit over the years that I've been using it. The platform is intuitive and the user-friendly design keeps me coming back.",
   },
   {
     name: "Md Imran",
     date: "24.11.2024",
     earned: "$217",
-    text: "In binary trading, Qx Broker is very good for me! The broker's deposit and withdrawal system is very good. Best regards, Qx Broker broker from me.",
+    text: "In binary trading, QX Profit is very good for me! The broker's deposit and withdrawal system is very good. Best regards, QX Profit broker from me.",
   },
   {
     name: "Shree Ganesh",
     date: "20.11.2024",
     earned: "$379",
-    text: "I've been using Qx Broker for some time now, and the experience has been excellent. The platform is straightforward to navigate, with a clean and modern layout.",
+    text: "I've been using QX Profit for some time now, and the experience has been excellent. The platform is straightforward to navigate, with a clean and modern layout.",
   },
 ];
 
@@ -73,7 +73,7 @@ const QxTestimonials: React.FC = () => (
           What people say about us
         </h2>
         <p className="mt-3 text-sm text-gray-400">
-          We asked our customers to rate Qx Broker on a five-point scale.
+          We asked our customers to rate QX Profit on a five-point scale.
         </p>
       </div>
 

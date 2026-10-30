@@ -1,4 +1,4 @@
-/* ────────── QX BROKER — Features of the platform ──────────
+/* ────────── QX PROFIT — Features of the platform ──────────
    3 × 2 grid of platform highlights. Each card = coloured icon
    tile + title + copy + blue call-to-action link.
    ───────────────────────────────────────────────────────── */

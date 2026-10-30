@@ -20,19 +20,19 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Qx Broker",
-  description: "Trade on your favorite trading platforms with Qx Broker",
+  title: "QX Profit",
+  description: "Trade on your favorite trading platforms with QX Profit",
   openGraph: {
-    title: "Qx Broker",
-    description: "Trade on your favorite trading platforms with Qx Broker",
+    title: "QX Profit",
+    description: "Trade on your favorite trading platforms with QX Profit",
     url: "https://www.qxprofit.com/",
-    siteName: "Qx Broker",
+    siteName: "QX Profit",
     images: [
       {
         url: "https://www.qxprofit.com/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Qx Broker",
+        alt: "QX Profit",
       },
     ],
     type: "website",

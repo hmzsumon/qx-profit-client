@@ -1,4 +1,4 @@
-/* ────────── QX BROKER — About: "Any doubts?" demo CTA ──────────
+/* ────────── QX PROFIT — About: "Any doubts?" demo CTA ──────────
    Left: pitch + "Demo account" button. Right: a monitor mock with
    a green speech bubble.
    ──────────────────────────────────────────────────────────── */
@@ -33,7 +33,7 @@ const QxAboutDemoCta: React.FC = () => (
         {/* ── Monitor mock ── */}
         <div className="relative mx-auto w-full max-w-sm">
           <div className="absolute -top-4 right-2 z-10 rounded-xl bg-[#2E7DF6] px-4 py-2 text-xs font-bold text-white shadow-lg">
-            Qx Broker: while others doubt, you act!
+            QX Profit: while others doubt, you act!
           </div>
           <div className="rounded-xl border border-white/10 bg-[#1c2230] p-3">
             <svg viewBox="0 0 320 170" className="w-full" aria-hidden>

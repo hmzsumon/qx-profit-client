@@ -1,4 +1,4 @@
-/* ────────── QX BROKER — Coming soon placeholder ──────────
+/* ────────── QX PROFIT — Coming soon placeholder ──────────
    Lightweight stand-in for pages that are linked in the navbar
    but not built yet (About us, Blog, Demo account).
    ──────────────────────────────────────────────────────── */

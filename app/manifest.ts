@@ -2,9 +2,9 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Qx Broker",
-    short_name: "Qx Broker",
-    description: "Qx Broker trading platform",
+    name: "QX Profit",
+    short_name: "QX Profit",
+    description: "QX Profit trading platform",
     // installed app opens on the sign-in screen; the site root stays the
     // marketing home for regular browsers
     start_url: "/register-login?tab=signin",

@@ -1,4 +1,4 @@
-/* ────────── QX BROKER — FAQ teaser (home) ──────────
+/* ────────── QX PROFIT — FAQ teaser (home) ──────────
    Six of the most common questions in an accordion, plus a
    "still have questions?" prompt linking to the full /faq page.
    ────────────────────────────────────────────────── */
@@ -20,11 +20,11 @@ const FAQS: QxAccordionItem[] = [
   },
   {
     q: "What is a trading platform and what is it for?",
-    a: "A trading platform is the software you use to analyse price charts and place trades on assets such as currencies, commodities, indices and crypto. Qx Broker runs in your browser and on mobile.",
+    a: "A trading platform is the software you use to analyse price charts and place trades on assets such as currencies, commodities, indices and crypto. QX Profit runs in your browser and on mobile.",
   },
   {
     q: "Can I trade using a phone / mobile device?",
-    a: "Yes. Qx Broker is fully responsive and there is a dedicated mobile app, so you can trade from any phone or tablet with an internet connection.",
+    a: "Yes. QX Profit is fully responsive and there is a dedicated mobile app, so you can trade from any phone or tablet with an internet connection.",
   },
   {
     q: "What is the minimum deposit amount?",
@@ -32,7 +32,7 @@ const FAQS: QxAccordionItem[] = [
   },
   {
     q: "Are there any deposit or withdrawal fees?",
-    a: "Qx Broker does not charge a deposit fee. Withdrawal fees, if any, depend on the selected payment provider and are shown before you confirm.",
+    a: "QX Profit does not charge a deposit fee. Withdrawal fees, if any, depend on the selected payment provider and are shown before you confirm.",
   },
 ];
 

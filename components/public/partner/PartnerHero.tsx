@@ -40,7 +40,7 @@ export default function PartnerHero() {
       {/* ── headline + CTA ── */}
       <div className="relative z-10 mx-auto max-w-3xl px-4 text-center">
         <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-[42px]">
-          Qx Broker presents a lucrative and transparent affiliate program
+          QX Profit presents a lucrative and transparent affiliate program
           designed to boost your profitability
         </h1>
         <p className="mx-auto mt-5 max-w-xl text-sm text-[#8b93a7] sm:text-base">

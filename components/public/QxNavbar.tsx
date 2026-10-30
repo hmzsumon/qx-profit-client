@@ -1,4 +1,4 @@
-/* ────────── QX BROKER — Public Navbar ──────────
+/* ────────── QX PROFIT — Public Navbar ──────────
    Partner-program header: logo · centred nav · "Login" (subtle) +
    "Sign Up" (blue). No language selector. Collapses to a hamburger
    sheet on mobile.

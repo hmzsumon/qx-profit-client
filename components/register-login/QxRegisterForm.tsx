@@ -1,4 +1,4 @@
-/* ────────── QX BROKER — Registration form ──────────
+/* ────────── QX PROFIT — Registration form ──────────
    Country · Currency · Email · Password · Promo code, plus the two
    confirmation checkboxes, then the blue "Registration →" button.
 

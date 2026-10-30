@@ -1,4 +1,4 @@
-/* ────────── QX BROKER — Auth form primitives ──────────
+/* ────────── QX PROFIT — Auth form primitives ──────────
    Material-style "outlined" fields (notched floating label),
    password field with visibility toggle, the blue submit button
    with a trailing arrow, the segmented Login/Registration tabs,

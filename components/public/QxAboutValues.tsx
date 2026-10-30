@@ -1,5 +1,5 @@
-/* ────────── QX BROKER — About: "A modern platform for modern people" ──────────
-   Four value cards describing what makes Qx Broker different.
+/* ────────── QX PROFIT — About: "A modern platform for modern people" ──────────
+   Four value cards describing what makes QX Profit different.
    ────────────────────────────────────────────────────────────────────────── */
 
 import React from "react";
@@ -9,7 +9,7 @@ import { Gauge, ScanLine, ShieldCheck, Headset, type LucideIcon } from "lucide-r
 const VALUES: { Icon: LucideIcon; text: string }[] = [
   {
     Icon: Gauge,
-    text: "The main advantage of Qx Broker is premium quality in everything, with no exceptions. A transparent platform, advanced technology and fair conditions for every participant are what make us unique.",
+    text: "The main advantage of QX Profit is premium quality in everything, with no exceptions. A transparent platform, advanced technology and fair conditions for every participant are what make us unique.",
   },
   {
     Icon: ScanLine,

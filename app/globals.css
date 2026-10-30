@@ -717,12 +717,3 @@ input::selection {
 }
 
 /* ────────── End Start User Balance Info ────────── */
-
-/* Qx Broker user panel: subtle teal accents, with the existing layout. */
-.qx-broker-panel { accent-color: #14b8a6; }
-.qx-broker-panel [class*="bg-[#2E7DF6]"] { background-color: #0d9488; }
-.qx-broker-panel [class*="bg-[#2E7DF6]/15"] { background-color: rgb(13 148 136 / 15%); }
-.qx-broker-panel [class*="hover:bg-[#1E6FE0]"]:hover { background-color: #0f766e; }
-.qx-broker-panel [class*="text-[#5AA2FF]"] { color: #5eead4; }
-.qx-broker-panel [class*="from-[#12203a]"] { --tw-gradient-from: #103632 var(--tw-gradient-from-position); }
-.qx-broker-panel [class*="to-[#0e1626]"] { --tw-gradient-to: #0d2024 var(--tw-gradient-to-position); }
